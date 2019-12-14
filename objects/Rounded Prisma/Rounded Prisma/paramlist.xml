@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ParamSection>
+	<ParamSectHeader>
+		<AutoHotspots>false</AutoHotspots>
+		<StatBits>
+			<STBit_FixSize/>
+		</StatBits>
+		<WDLeftFrame>0</WDLeftFrame>
+		<WDRightFrame>0</WDRightFrame>
+		<WDTopFrame>0</WDTopFrame>
+		<WDBotFrame>0</WDBotFrame>
+		<LayFlags>65535</LayFlags>
+		<WDMirrorThickness>0</WDMirrorThickness>
+		<WDWallInset>0</WDWallInset>
+	</ParamSectHeader>
+	<Parameters SectVersion="27" SectionFlags="0" SubIdent="0">
+		<Length Name="A">
+			<Description><![CDATA["Breite"]]></Description>
+			<Fix/>
+			<Value>1</Value>
+		</Length>
+		<Length Name="B">
+			<Description><![CDATA["Höhe"]]></Description>
+			<Fix/>
+			<Value>1</Value>
+		</Length>
+		<Length Name="ZZYZX">
+			<Description><![CDATA["Höhe"]]></Description>
+			<Fix/>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+			<Value>0</Value>
+		</Length>
+		<Boolean Name="AC_show2DHotspotsIn3D">
+			<Description><![CDATA["2D-Fixpunkte in 3D zeigen"]]></Description>
+			<Fix/>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+			<Value>1</Value>
+		</Boolean>
+		<Length Name="ac_bottomlevel">
+			<Description><![CDATA["Untere Ebene"]]></Description>
+			<Fix/>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+			<Value>0</Value>
+		</Length>
+		<Length Name="ac_toplevel">
+			<Description><![CDATA["Obere Ebene"]]></Description>
+			<Fix/>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+			<Value>0</Value>
+		</Length>
+		<PenColor Name="sel_pen">
+			<Description><![CDATA["Konturstift"]]></Description>
+			<Value>1</Value>
+		</PenColor>
+		<LineType Name="sel_lt">
+			<Description><![CDATA["Konturtyp"]]></Description>
+			<Value>1</Value>
+		</LineType>
+		<Boolean Name="b_fill">
+			<Description><![CDATA["Schraffur"]]></Description>
+			<Value>0</Value>
+		</Boolean>
+		<FillPattern Name="sel_fill">
+			<Description><![CDATA["Schraffurtyp"]]></Description>
+			<Value>23</Value>
+		</FillPattern>
+		<PenColor Name="sel_fillpen">
+			<Description><![CDATA["Vordergundstift"]]></Description>
+			<Value>1</Value>
+		</PenColor>
+		<PenColor Name="sel_backpen">
+			<Description><![CDATA["Hintergrundstift"]]></Description>
+			<Value>0</Value>
+		</PenColor>
+		<Separator Name="___RoundedPri_A">
+			<Description><![CDATA[""]]></Description>
+		</Separator>
+		<RealNum Name="sel_radius">
+			<Description><![CDATA["Radius"]]></Description>
+			<Value>0.2</Value>
+		</RealNum>
+		<Angle Name="sel_angle_upper">
+			<Description><![CDATA["Winkel oben"]]></Description>
+			<Value>0</Value>
+		</Angle>
+		<Angle Name="sel_angle_down">
+			<Description><![CDATA["Winkel unten"]]></Description>
+			<Value>90</Value>
+		</Angle>
+	</Parameters>
+</ParamSection>

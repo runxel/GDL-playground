@@ -1,0 +1,1 @@
+﻿Values 		"sel_fillpen" Range [1, 255]if not(b_fill) then	LOCK 	"sel_fill", "sel_fillpen", "sel_backpen"endif
