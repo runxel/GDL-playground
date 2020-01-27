@@ -1,0 +1,55 @@
+!––– [MASTERSCRIPT] –––!
+
+! declare all the variables we need
+_dummy = "" ! only made so it can be ignored…
+pos    = ""
+nodename  = ""
+nodevalue = ""
+nodetype  = ""
+err   = ""
+errex = ""
+
+
+! first we need to open the file
+!< `ch` stands for 'channel'
+ch = OPEN ('xml', 'ARCHICAD Library.version', 'rl')
+!    |       |     └ the file name             |└ Locally loaded
+!    |       └ add-on type                     └ Read-only
+!    └ open command: the file we want to read
+
+
+! returns new position descriptor (i.e. root of the xml)  <= pos
+r = INPUT (ch, "NewPositionDesc", _dummy, pos)
+!           |   └ command to exec  |      └ 'pos' stores the position from which we read
+!           |                      └ gets ignored, but must be set
+!           └ channel we want to read
+
+! now lets move into the tree
+! lets find the "gslanguage" node first
+rr = INPUT (ch, "MoveToNode FromFirstChild g* ELEM 1", pos, nodename, nodevalue, nodetype)
+!                |                                     |    |         |          └ will be "ELEM"
+!                |                                     |    |         └ value will be empty at this time!
+!                |                                     |    └ nodename will output "gslanguage"
+!                |                                     └ input the position from which we want to start
+!                |                                       / BUT also changes/mutates the position of the descriptor!
+!                └ This command means:
+!                  / Move to a node
+!                  / starting at the first child node from the current 'pos'-node
+!                  / now get the _first_ "ELEM" (element)
+!                  / which starts with "g"
+
+! We still didn't got the actual value
+!  ("nodevalue" was empty, because at this point this simple parser doesn't know what's inside)
+rrr = INPUT (ch, "MoveToNode FromFirstChild * TXT", pos, nodename, nodevalue, nodetype)
+! basically the same as above, but this time we want the TXT (text) of the node
+! we can omit the "1", because that's the default anyway
+
+! you can use 'GetLastError' after every 'INPUT' command and see, what's wrong
+e = INPUT (ch, "GetLastError", _dummy, err, errex)
+!                              |       |    └ error message (textual explanation)
+!                              |       └ errorcode, =0 if ok
+!                              └ gets ignored, but must be set
+
+
+! close the channel (i.e. the file):
+CLOSE ch
