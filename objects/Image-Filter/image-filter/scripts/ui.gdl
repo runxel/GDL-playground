@@ -1,0 +1,43 @@
+﻿! UI-Script !
+
+object_name = "* Image Filter * DEMO *"
+ui_dialog object_name, 444, 266
+
+txtsize = 0                             ! default size
+dict ui
+    ui.h = 16                               ! height
+    ui.out.w = 190                          ! width outfield (text)
+    ui.in.w = 130                           ! width infield (input)
+    ui.ofs.x1 = 10                          ! start/offset left column
+    ui.lead = 24                            ! lead (distance between lines)
+    ui.ofs.x2 = ui.ofs.x1 + ui.out.w + 10   ! offset right column
+    ui.ofs.y = 2                            ! outfield need offset so they are aligned
+
+! ---------------------------------------------------------------------- !
+
+dy = ui.ofs.y
+
+ui_style txtsize, 0
+
+ui_outfield "prefix filter", ui.ofs.x1, dy + ui.ofs.y, ui.out.w, ui.h, 1
+ui_infield "str_prefix", ui.ofs.x2, dy, ui.in.w, ui.h
+dy = dy + ui.lead
+
+ui_outfield "filtered images count", ui.ofs.x1, dy + ui.ofs.y, ui.out.w, ui.h, 1 
+ui_infield "i_selected", ui.ofs.x2, dy, ui.in.w, ui.h
+dy = dy + ui.lead
+
+ui_outfield "select image", ui.ofs.x1, dy + ui.ofs.y, ui.out.w, ui.h, 1
+ui_infield "str_img_choice", ui.ofs.x2, dy, ui.in.w, ui.h
+dy = dy + ui.lead
+
+if i_img_count > 0 then
+    ui_infield{3}  "str_img_choice",  ui.ofs.x2, dy,
+                    100, 100,
+                    2, "", 
+                    i_img_count, i_img_count, 100, 100, 100, 100, 
+                    lib_imgs_prefixed, lib_imgs_prefixed, lib_imgs_prefixed 
+else
+    ui_style txtsize, 1  ! bold
+    ui_outfield "No images found!", ui.ofs.x2, dy, ui.out.w, ui.h
+endif

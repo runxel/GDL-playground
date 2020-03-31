@@ -1,0 +1,27 @@
+﻿! MASTER script !
+
+dim lib_imgs[]
+! get all user loaded images
+b_img_exist = application_query("LIBRARY_MANAGER", "USER_IMAGE_FILES", lib_imgs)
+
+i_img_count = vardim1(lib_imgs)
+
+dim lib_imgs_prefixed[]
+k = 1
+i_num_prefix = strlen(str_prefix) 
+
+! look if there is a prefix given via UI
+if ((str_prefix # " ") and (str_prefix # "")) then
+    for i = 1 to i_img_count
+        ! compare the strings
+        if strsub(lib_imgs[i], 1, i_num_prefix) = str_prefix then
+            lib_imgs_prefixed[k] = lib_imgs[i]
+            k = k + 1
+        endif   
+    next i
+else
+    ! pass through complete list
+    lib_imgs_prefixed = lib_imgs
+endif
+
+i_img_count = vardim1(lib_imgs_prefixed)

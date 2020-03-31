@@ -1,1 +1,9 @@
-﻿! PARAM script !parameters i_selected = i_img_countLOCK "i_selected"if i_img_count > 0 then values "str_img_choice" lib_imgs_prefixedparameters i_num_prefix = i_num_prefixLOCK "i_num_prefix"
+﻿! PARAM script !
+
+parameters i_selected = i_img_count
+LOCK "i_selected"
+
+if i_img_count > 0 then values "str_img_choice" lib_imgs_prefixed
+
+parameters i_num_prefix = i_num_prefix
+LOCK "i_num_prefix"
