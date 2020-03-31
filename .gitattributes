@@ -2,7 +2,8 @@
 # default behavior, in case people don't have core.autocrlf set
 * text=auto
 
-*.gdl text
+# gdl files should display properly everywhere
+*.gdl text eol=crlf
 
 # truly binary; should not be modified
 *.png binary
