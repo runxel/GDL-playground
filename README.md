@@ -15,18 +15,20 @@ It's just for learning, folks.
 ---
 
 ## [Get User Language](objects/Get-Language)
-![Compatibility](https://img.shields.io/badge/compatibility-v20_build_6005_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
+![Compatibility](https://img.shields.io/badge/compatibility-?-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
 See [full article](https://lucasbecker.de/posts/detecting-user-s-language-via-gdl) on how to detect (kinda) the language the user might speak.
 
 
 ## [Picture Filter](objects/Image-Filter)
+![Compatibility](https://img.shields.io/badge/compatibility-18_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
+![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 DEMO for a image filter process. The filter (via a prefix) serves to limit the otherwise very large and performance-heavy image selection in a GDL object.
 
 
 ## [Rounded Prisma](objects/Rounded-Prisma)
-![Compatibility](https://img.shields.io/badge/compatibility-v20_build_6005_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
+![Compatibility](https://img.shields.io/badge/compatibility-21_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-yes-ff7979?style=flat-square)
 
 This object is a demo for a modeling case where you have two vectors with their angles and need a rounded corner where those vectors meet. How to get the coordinates?
