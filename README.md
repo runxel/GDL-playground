@@ -15,13 +15,13 @@ It's just for learning, folks.
 ---
 
 ## [Get User Language](objects/Get-Language)
-![Compatibility](https://img.shields.io/badge/compatibility-?-lightgrey?style=flat-square&logo=archicad&logoColor=white)
+![Compatibility](https://img.shields.io/badge/compatibility-tbd-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
 See [full article](https://lucasbecker.de/posts/detecting-user-s-language-via-gdl) on how to detect (kinda) the language the user might speak.
 
 
-## [Picture Filter](objects/Image-Filter)
+## [Image Filter](objects/Image-Filter)
 ![Compatibility](https://img.shields.io/badge/compatibility-18_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 DEMO for a image filter process. The filter (via a prefix) serves to limit the otherwise very large and performance-heavy image selection in a GDL object.
