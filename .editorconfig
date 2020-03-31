@@ -1,0 +1,23 @@
+# EditorConfig for https://github.com/runxel/GDL-playground
+# see docs at https://EditorConfig.org
+
+root = true
+
+[*]
+end_of_line = crlf
+
+[*.{gdl, xml}]
+charset = utf-8-bom
+indent_size = 4
+insert_final_newline = false
+
+[*.gdl]
+indent_style = space
+
+[*.xml]
+indent_style = tab
+
+[*.md]
+charset = utf-8
+indent_style = tab
+indent_size = 4
