@@ -1,0 +1,10 @@
+# .gitattributes
+# default behavior, in case people don't have core.autocrlf set
+* text=auto
+
+*.gdl text
+
+# truly binary; should not be modified
+*.png binary
+*.jpg binary
+*.gsm binary
