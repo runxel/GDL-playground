@@ -38,6 +38,25 @@ Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-t
 
 ![Rounded Prisma](img/rounded-prisma.png)
 
+---
+
+### Basic Stuff
+
+- You can't pass parameters or arguments to subroutines. Instead you have to fall back to something I call "nasty caller":  
+```
+if x = y then
+	nasty_caller = 1
+else
+	nasty_caller = 2
+endif
+gosub "mysubroutine"
+END !----------------------------!
+
+"mysubroutine":
+	i = foo * nasty_caller
+	! (...)
+return
+```
 
 ---
 
