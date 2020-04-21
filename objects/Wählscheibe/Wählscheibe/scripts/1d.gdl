@@ -1,0 +1,55 @@
+﻿! ––– MASTER script ––– !
+
+! BEWARE !
+! This whole script is just for fun.
+! Because of how GDL is, it is super verbose.
+! It was intended as a demo case and for learning.
+! Do not use it in production scripts.
+! ------
+
+
+eps = 0.0001
+tol = 0.1
+
+
+! some variables
+dialrad = 1.0
+knobrad = dialrad / 6
+extra = dialrad / 20
+
+
+inner_rad = dialrad - knobrad - extra
+outer_rad = dialrad + knobrad + extra
+rad_diff = outer_rad - inner_rad
+
+freeangle = 120
+knobdist = (360 - freeangle) / 10
+offset = 30
+
+! calculate the startvalues for the angles
+! i*knobdist+offset
+dict ang
+ang.d1 =  1 * knobdist + offset ! 54
+ang.d2 =  2 * knobdist + offset ! 78
+ang.d3 =  3 * knobdist + offset ! 102
+ang.d4 =  4 * knobdist + offset ! 126
+ang.d5 =  5 * knobdist + offset ! 150
+ang.d6 =  6 * knobdist + offset ! 174
+ang.d7 =  7 * knobdist + offset ! 198
+ang.d8 =  8 * knobdist + offset ! 222
+ang.d9 =  9 * knobdist + offset ! 246
+ang.d0 = 10 * knobdist + offset ! 270
+! you have to input those into the paramlist as well...
+
+
+! ----------- !
+! EXPLANATION ! 
+! This script utilizes the "pingpong" concept:
+! GLOB_MODPAR_NAME is already active _when_ editing, not afterwards.
+! This means you can't put a `parameters` inside an IF-loop, since this
+! would immobolize any hotspots editings. (In the case you want them to "snap back")
+! Instead you have to script all hotspots _twice_, and you "ping pong"
+! their display; only one is visible at a time.
+! The ping pong is a flag stored inside a parameter array.
+! Default value is `1`, and then changes to `-1` when you edit a hotspot.
+! ...

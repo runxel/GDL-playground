@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ParamSection>
+	<ParamSectHeader>
+		<AutoHotspots>false</AutoHotspots>
+		<StatBits>
+			<STBit_FixSize/>
+			<STBit_OneRunVLScript/>
+		</StatBits>
+		<WDLeftFrame>0</WDLeftFrame>
+		<WDRightFrame>0</WDRightFrame>
+		<WDTopFrame>0</WDTopFrame>
+		<WDBotFrame>0</WDBotFrame>
+		<LayFlags>65535</LayFlags>
+		<WDMirrorThickness>0</WDMirrorThickness>
+		<WDWallInset>0</WDWallInset>
+	</ParamSectHeader>
+	<Parameters SectVersion="27" SectionFlags="0" SubIdent="0">
+		<Length Name="A">
+			<Description><![CDATA["Maß 1"]]></Description>
+			<Fix/>
+			<Value>1</Value>
+		</Length>
+		<Length Name="B">
+			<Description><![CDATA["Maß 2"]]></Description>
+			<Fix/>
+			<Value>1</Value>
+		</Length>
+		<String Name="str_output">
+			<Description><![CDATA["Output"]]></Description>
+			<Value><![CDATA[""]]></Value>
+		</String>
+		<String Name="fontType">
+			<Description><![CDATA["Schriftart"]]></Description>
+			<Value><![CDATA["Arial Westlich"]]></Value>
+		</String>
+		<PenColor Name="pen_general">
+			<Description><![CDATA["Stift"]]></Description>
+			<Value>1</Value>
+		</PenColor>
+		<Angle Name="dialangle1a">
+			<Description><![CDATA["Winkel 1 a"]]></Description>
+			<Value>54</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle1b">
+			<Description><![CDATA["Winkel 1 b"]]></Description>
+			<Value>54</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle2a">
+			<Description><![CDATA["Winkel 2 a"]]></Description>
+			<Value>78</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle2b">
+			<Description><![CDATA["Winkel 2 b"]]></Description>
+			<Value>78</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle3a">
+			<Description><![CDATA["Winkel 3 a"]]></Description>
+			<Value>102</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle3b">
+			<Description><![CDATA["Winkel 3 b"]]></Description>
+			<Value>102</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle4a">
+			<Description><![CDATA["Winkel 4 a"]]></Description>
+			<Value>126</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle4b">
+			<Description><![CDATA["Winkel 4 b"]]></Description>
+			<Value>126</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle5a">
+			<Description><![CDATA["Winkel 5 a"]]></Description>
+			<Value>150</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle5b">
+			<Description><![CDATA["Winkel 5 b"]]></Description>
+			<Value>150</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle6a">
+			<Description><![CDATA["Winkel 6 a"]]></Description>
+			<Value>174</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle6b">
+			<Description><![CDATA["Winkel 6 b"]]></Description>
+			<Value>174</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle7a">
+			<Description><![CDATA["Winkel 7 a"]]></Description>
+			<Value>198</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle7b">
+			<Description><![CDATA["Winkel 7 b"]]></Description>
+			<Value>198</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle8a">
+			<Description><![CDATA["Winkel 8 a"]]></Description>
+			<Value>222</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle8b">
+			<Description><![CDATA["Winkel 8 b"]]></Description>
+			<Value>222</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle9a">
+			<Description><![CDATA["Winkel 9 a"]]></Description>
+			<Value>246</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle9b">
+			<Description><![CDATA["Winkel 9 b"]]></Description>
+			<Value>246</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle0a">
+			<Description><![CDATA["Winkel 0 a"]]></Description>
+			<Value>270</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<Angle Name="dialangle0b">
+			<Description><![CDATA["Winkel 0 b"]]></Description>
+			<Value>270</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Angle>
+		<RealNum Name="reset1">
+			<Description><![CDATA["Reset 1"]]></Description>
+			<Value>0</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</RealNum>
+		<RealNum Name="reset2">
+			<Description><![CDATA["Reset 2"]]></Description>
+			<Value>0</Value>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</RealNum>
+		<RealNum Name="textPtX">
+			<Description><![CDATA["Text Insert Point X"]]></Description>
+			<Value>1.25</Value>
+		</RealNum>
+		<RealNum Name="textPtY">
+			<Description><![CDATA["Text Insert Point X"]]></Description>
+			<Value>1.25</Value>
+		</RealNum>
+		<Integer Name="pingpong">
+			<Description><![CDATA["Flags pingpong"]]></Description>
+			<ArrayValues FirstDimension="11" SecondDimension="0">
+				<AVal Row="1">1</AVal>
+				<AVal Row="2">1</AVal>
+				<AVal Row="3">1</AVal>
+				<AVal Row="4">1</AVal>
+				<AVal Row="5">1</AVal>
+				<AVal Row="6">1</AVal>
+				<AVal Row="7">1</AVal>
+				<AVal Row="8">1</AVal>
+				<AVal Row="9">1</AVal>
+				<AVal Row="10">1</AVal>
+				<AVal Row="11">1</AVal>
+			</ArrayValues>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+		</Integer>
+	</Parameters>
+</ParamSection>

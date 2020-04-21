@@ -1,0 +1,223 @@
+﻿! ––– PARAM script ––– !
+
+lock "A", "B"
+
+values  "reset1", 0, -0.6
+values  "reset2", 0, -0.6
+
+! reset ping pong
+if GLOB_MODPAR_NAME = "reset1" and reset1 < 0 then
+	pingpong[11] = -1 * pingpong[11]
+	reset2 = 0
+	str_output = ""
+	parameters  pingpong = pingpong,
+				reset2 = reset2,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "reset2" and reset2 < 0 then
+	pingpong[11] = -1 * pingpong[11]
+	reset1 = 0
+	str_output = ""
+	parameters  pingpong = pingpong,
+				reset1 = reset1,
+				str_output = str_output
+endif
+
+
+cpt = 0
+! set minimal and maximal values
+for cpt = 1 to 10
+	for version = 1 to 2
+		if version = 1 then addstring = "a"
+		if version = 2 then addstring = "b"
+
+		param = "dialangle" + str(cpt, 1, 0) + addstring
+		if cpt = 10 then param = "dialangle0" + addstring
+		baseangle = cpt*knobdist+offset
+		values  param, range [-45, baseangle]
+	next version
+next cpt
+
+
+! ---------------------------------------------------------------- !
+! now comes the interesting part: we play pingpong with all 10 possible values:
+! 1
+if GLOB_MODPAR_NAME = "dialangle1a" and dialangle1a # ang.d1 and abs(-45-dialangle1a) < tol then
+	pingpong[1] = -1 * pingpong[1]
+	dialangle1b = ang.d1
+	str_output = str_output + "1"
+	parameters  pingpong = pingpong,
+				dialangle1b = dialangle1b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle1b" and dialangle1b # ang.d1 and abs(-45-dialangle1b) < tol then
+	pingpong[1] = -1 * pingpong[1]
+	dialangle1a = ang.d1
+	str_output = str_output + "1"
+	parameters  pingpong = pingpong,
+				dialangle1a = dialangle1a,
+				str_output = str_output
+endif
+
+! 2
+if GLOB_MODPAR_NAME = "dialangle2a" and dialangle2a # ang.d2 and abs(-45-dialangle2a) < tol then
+	pingpong[2] = -1 * pingpong[2]
+	dialangle2b = ang.d2
+	str_output = str_output + "2"
+	parameters  pingpong = pingpong,
+				dialangle2b = dialangle2b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle2b" and dialangle2b # ang.d2 and abs(-45-dialangle2b) < tol then
+	pingpong[2] = -1 * pingpong[2]
+	dialangle2a = ang.d2
+	str_output = str_output + "2"
+	parameters  pingpong = pingpong,
+				dialangle2a = dialangle2a,
+				str_output = str_output
+endif
+
+! 3
+if GLOB_MODPAR_NAME = "dialangle3a" and dialangle3a # ang.d3 and abs(-45-dialangle3a) < tol then
+	pingpong[3] = -1 * pingpong[3]
+	dialangle3b = ang.d3
+	str_output = str_output + "3"
+	parameters  pingpong = pingpong,
+				dialangle3b = dialangle3b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle3b" and dialangle3b # ang.d3 and abs(-45-dialangle3b) < tol then
+	pingpong[3] = -1 * pingpong[3]
+	dialangle3a = ang.d3
+	str_output = str_output + "3"
+	parameters  pingpong = pingpong,
+				dialangle3a = dialangle3a,
+				str_output = str_output
+endif
+
+! 4
+if GLOB_MODPAR_NAME = "dialangle4a" and dialangle4a # ang.d4 and abs(-45-dialangle4a) < tol then
+	pingpong[4] = -1 * pingpong[4]
+	dialangle4b = ang.d4
+	str_output = str_output + "4"
+	parameters  pingpong = pingpong,
+				dialangle4b = dialangle4b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle4b" and dialangle4b # ang.d4 and abs(-45-dialangle4b) < tol then
+	pingpong[4] = -1 * pingpong[4]
+	dialangle4a = ang.d4
+	str_output = str_output + "4"
+	parameters  pingpong = pingpong,
+				dialangle4a = dialangle4a,
+				str_output = str_output
+endif
+
+! 5
+if GLOB_MODPAR_NAME = "dialangle5a" and dialangle5a # ang.d5 and abs(-45-dialangle5a) < tol then
+	pingpong[5] = -1 * pingpong[5]
+	dialangle5b = ang.d5
+	str_output = str_output + "5"
+	parameters  pingpong = pingpong,
+				dialangle5b = dialangle5b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle5b" and dialangle5b # ang.d5 and abs(-45-dialangle5b) < tol then
+	pingpong[5] = -1 * pingpong[5]
+	dialangle5a = ang.d5
+	str_output = str_output + "5"
+	parameters  pingpong = pingpong,
+				dialangle5a = dialangle5a,
+				str_output = str_output
+endif
+
+! 6
+if GLOB_MODPAR_NAME = "dialangle6a" and dialangle6a # ang.d6 and abs(-45-dialangle6a) < tol then
+	pingpong[6] = -1 * pingpong[6]
+	dialangle6b = ang.d6
+	str_output = str_output + "6"
+	parameters  pingpong = pingpong,
+				dialangle6b = dialangle6b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle6b" and dialangle6b # ang.d6 and abs(-45-dialangle6b) < tol then
+	pingpong[6] = -1 * pingpong[6]
+	dialangle6a = ang.d6
+	str_output = str_output + "6"
+	parameters  pingpong = pingpong,
+				dialangle6a = dialangle6a,
+				str_output = str_output
+endif
+
+! 7
+if GLOB_MODPAR_NAME = "dialangle7a" and dialangle7a # ang.d7 and abs(-45-dialangle7a) < tol then
+	pingpong[7] = -1 * pingpong[7]
+	dialangle7b = ang.d7
+	str_output = str_output + "7"
+	parameters  pingpong = pingpong,
+				dialangle7b = dialangle7b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle7b" and dialangle7b # ang.d7 and abs(-45-dialangle7b) < tol then
+	pingpong[7] = -1 * pingpong[7]
+	dialangle7a = ang.d7
+	str_output = str_output + "7"
+	parameters  pingpong = pingpong,
+				dialangle7a = dialangle7a,
+				str_output = str_output
+endif
+
+! 8
+if GLOB_MODPAR_NAME = "dialangle8a" and dialangle8a # ang.d8 and abs(-45-dialangle8a) < tol then
+	pingpong[8] = -1 * pingpong[8]
+	dialangle8b = ang.d8
+	str_output = str_output + "8"
+	parameters  pingpong = pingpong,
+				dialangle8b = dialangle8b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle8b" and dialangle8b # ang.d8 and abs(-45-dialangle8b) < tol then
+	pingpong[8] = -1 * pingpong[8]
+	dialangle8a = ang.d8
+	str_output = str_output + "8"
+	parameters  pingpong = pingpong,
+				dialangle8a = dialangle8a,
+				str_output = str_output
+endif
+
+! 9
+if GLOB_MODPAR_NAME = "dialangle9a" and dialangle9a # ang.d9 and abs(-45-dialangle9a) < tol then
+	pingpong[9] = -1 * pingpong[9]
+	dialangle9b = ang.d9
+	str_output = str_output + "9"
+	parameters  pingpong = pingpong,
+				dialangle9b = dialangle9b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle9b" and dialangle9b # ang.d9 and abs(-45-dialangle9b) < tol then
+	pingpong[9] = -1 * pingpong[9]
+	dialangle9a = ang.d9
+	str_output = str_output + "9"
+	parameters  pingpong = pingpong,
+				dialangle9a = dialangle9a,
+				str_output = str_output
+endif
+
+! 0
+if GLOB_MODPAR_NAME = "dialangle0a" and dialangle0a # ang.d0 and abs(-45-dialangle0a) < tol then
+	pingpong[10] = -1 * pingpong[10]
+	dialangle0b = ang.d0
+	str_output = str_output + "0"
+	parameters  pingpong = pingpong,
+				dialangle0b = dialangle0b,
+				str_output = str_output
+endif
+if GLOB_MODPAR_NAME = "dialangle0b" and dialangle0b # ang.d0 and abs(-45-dialangle0b) < tol then
+	pingpong[10] = -1 * pingpong[10]
+	dialangle0a = ang.d0
+	str_output = str_output + "0"
+	parameters  pingpong = pingpong,
+				dialangle0a = dialangle0a,
+				str_output = str_output
+endif
+

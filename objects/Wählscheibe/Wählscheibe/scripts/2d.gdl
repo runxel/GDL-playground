@@ -1,0 +1,393 @@
+﻿! ––– 2D script ––– !
+
+uID = 100
+
+fontHeight = knobrad*1000/GLOB_SCALE
+define style "fontstyle_mid" fontType, fontHeight, 5, 0
+define style "fontstyle_baseL" fontType, fontHeight, 7, 0
+
+
+pen  pen_general
+fill_hider = ind(FILL, "Nur Hintergrund-Stift")
+if fill_hider = 0 then
+	! pen was not found
+	fill_hider = 65 ! hopefully the right one
+endif
+fill  fill_hider
+drawindex  20
+
+hotspot2  0, 0, uID : uID=uID+1
+
+if GLOB_FEEDBACK_MODE then
+	! show rotation arc and stopper
+	arc2  0, 0, dialrad, -45, 270
+	rot2  45
+	add2  0, -(inner_rad + rad_diff/2)
+		line2  0, rad_diff*0.4,  0, -rad_diff*0.4
+	del   2
+
+	line2  -0.3, 0,  0.3, 0
+	! draw "reset" letters	
+	add2 -0.55, -0.3
+		gosub "drawReset"
+	del 1
+endif
+
+! reset -----------------------------------------------------!
+circle2   0.3, 0, inner_rad/5
+circle2  -0.3, 0, inner_rad/5
+add2 0.3, 0
+	if pingpong[11] = 1 then
+		hotspot2  reset1, 0, uID, reset1, 1+128 : uID=uID+1 !base
+		hotspot2      -1, 0, uID, reset1, 3     : uID=uID+1 !ref
+		hotspot2  reset1, 0, uID, reset1, 2     : uID=uID+1 !move
+	else
+		hotspot2  reset2, 0, uID, reset2, 1+128 : uID=uID+1 !base
+		hotspot2      -1, 0, uID, reset2, 3     : uID=uID+1 !ref
+		hotspot2  reset2, 0, uID, reset2, 2     : uID=uID+1 !move
+	endif
+del 1
+! --- reset end ---------------------------------------------!
+
+circle2  0, 0, inner_rad
+circle2  0, 0, outer_rad
+hotarc2 0, 0, dialrad, -45, 270, uID : uID=uID+1
+
+
+! write the text from the rotary dial somewhere and let the user move it
+! horizontally –– x
+hotspot2        0, textPtY, uID, textPtX, 1+128  : uID=uID+1 !base
+hotspot2       -1, textPtY, uID, textPtX, 3      : uID=uID+1 !ref
+hotspot2  textPtX, textPtY, uID, textPtX, 2, textPtX, "Text X Koor."  : uID=uID+1 !move
+! vertically | y
+hotspot2  textPtX,       0, uID, textPtY, 1+128  : uID=uID+1 !base
+hotspot2  textPtX,      -1, uID, textPtY, 3      : uID=uID+1 !ref
+hotspot2  textPtX, textPtY, uID, textPtY, 2, textPtY, "Text Y Koor."  : uID=uID+1 !move
+
+set style "fontstyle_baseL"
+text2  textPtX, textPtY, str_output
+! --- text end ----------------------------------------------- !
+
+
+for pt = 1 to 10
+	curr_angle = pt*knobdist+offset
+	! playin' some ping pong shit here
+		if pt = 1 then
+			if pingpong[1] = 1 then
+				curr_angle = dialangle1a
+			else
+				curr_angle = dialangle1b
+			endif
+		endif
+		if pt = 2 then
+			if pingpong[2] = 1 then
+				curr_angle = dialangle2a
+			else
+				curr_angle = dialangle2b
+			endif
+		endif
+		if pt = 3 then
+			if pingpong[3] = 1 then
+				curr_angle = dialangle3a
+			else
+				curr_angle = dialangle3b
+			endif
+		endif
+		if pt = 4 then
+			if pingpong[4] = 1 then
+				curr_angle = dialangle4a
+			else
+				curr_angle = dialangle4b
+			endif
+		endif
+		if pt = 5 then
+			if pingpong[5] = 1 then
+				curr_angle = dialangle5a
+			else
+				curr_angle = dialangle5b
+			endif
+		endif
+		if pt = 6 then
+			if pingpong[6] = 1 then
+				curr_angle = dialangle6a
+			else
+				curr_angle = dialangle6b
+			endif
+		endif
+		if pt = 7 then
+			if pingpong[7] = 1 then
+				curr_angle = dialangle7a
+			else
+				curr_angle = dialangle7b
+			endif
+		endif
+		if pt = 8 then
+			if pingpong[8] = 1 then
+				curr_angle = dialangle8a
+			else
+				curr_angle = dialangle8b
+			endif
+		endif
+		if pt = 9 then
+			if pingpong[9] = 1 then
+				curr_angle = dialangle9a
+			else
+				curr_angle = dialangle9b
+			endif
+		endif
+		if pt = 10 then
+			if pingpong[10] = 1 then
+				curr_angle = dialangle0a
+			else
+				curr_angle = dialangle0b
+			endif
+		endif
+	currX = dialrad * cos(curr_angle)
+	currY = dialrad * sin(curr_angle)
+
+	circle2  currX, currY, knobrad
+
+	if pt < 10 then
+		txt = pt
+	else
+		txt = 0
+	endif
+
+	! the next part is dumb, but necessary since GDL doesn't allow dynamic param names
+	if pt = 1 then
+		if pingpong[1] = 1 then
+			hotspot2  0, 0, uID, dialangle1a, 6            : uID=uID+1 !mid
+			hotspot2  dialrad, 0, uID, dialangle1a, 4+128  : uID=uID+1 !base
+			hotspot2  currX, currY, pt, dialangle1a, 5                 !move
+		else
+			hotspot2  0, 0, uID, dialangle1b, 6            : uID=uID+1 !mid
+			hotspot2  dialrad, 0, uID, dialangle1b, 4+128  : uID=uID+1 !base
+			hotspot2  currX, currY, pt, dialangle1b, 5                 !move
+		endif
+	endif
+	if pt = 2 then
+		if pingpong[2] = 1 then
+			hotspot2  0, 0, uID, dialangle2a, 6            : uID=uID+1 !mid
+			hotspot2  dialrad, 0, uID, dialangle2a, 4+128  : uID=uID+1 !base
+			hotspot2  currX, currY, pt, dialangle2a, 5                 !move
+		else
+			hotspot2  0, 0, uID, dialangle2b, 6            : uID=uID+1 !mid
+			hotspot2  dialrad, 0, uID, dialangle2b, 4+128  : uID=uID+1 !base
+			hotspot2  currX, currY, pt, dialangle2b, 5                 !move
+		endif
+	endif
+	if pt = 3 then
+		if pingpong[3] = 1 then
+			hotspot2        0,     0, uID, dialangle3a, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle3a, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle3a, 5 
+		else
+			hotspot2        0,     0, uID, dialangle3b, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle3b, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle3b, 5                  !move
+		endif
+	endif
+	if pt = 4 then
+		if pingpong[4] = 1 then
+			hotspot2        0,     0, uID, dialangle4a, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle4a, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle4a, 5 
+		else
+			hotspot2        0,     0, uID, dialangle4b, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle4b, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle4b, 5                  !move
+		endif
+	endif
+	if pt = 5 then
+		if pingpong[5] = 1 then
+			hotspot2        0,     0, uID, dialangle5a, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle5a, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle5a, 5 
+		else
+			hotspot2        0,     0, uID, dialangle5b, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle5b, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle5b, 5                  !move
+		endif
+	endif
+	if pt = 6 then
+		if pingpong[6] = 1 then
+			hotspot2        0,     0, uID, dialangle6a, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle6a, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle6a, 5 
+		else
+			hotspot2        0,     0, uID, dialangle6b, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle6b, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle6b, 5                  !move
+		endif
+	endif
+	if pt = 7 then
+		if pingpong[7] = 1 then
+			hotspot2        0,     0, uID, dialangle7a, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle7a, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle7a, 5 
+		else
+			hotspot2        0,     0, uID, dialangle7b, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle7b, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle7b, 5                  !move
+		endif
+	endif
+	if pt = 8 then
+		if pingpong[8] = 1 then
+			hotspot2        0,     0, uID, dialangle8a, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle8a, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle8a, 5 
+		else
+			hotspot2        0,     0, uID, dialangle8b, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle8b, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle8b, 5                  !move
+		endif
+	endif
+	if pt = 9 then
+		if pingpong[9] = 1 then
+			hotspot2        0,     0, uID, dialangle9a, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle9a, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle9a, 5 
+		else
+			hotspot2        0,     0, uID, dialangle9b, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle9b, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle9b, 5                  !move
+		endif
+	endif
+	if pt = 10 then
+		if pingpong[10] = 1 then
+			hotspot2        0,     0, uID, dialangle0a, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle0a, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle0a, 5 
+		else
+			hotspot2        0,     0, uID, dialangle0b, 6      : uID=uID+1 !mid
+			hotspot2  dialrad,     0, uID, dialangle0b, 4+128  : uID=uID+1 !base
+			hotspot2    currX, currY,  pt, dialangle0b, 5                  !move
+		endif
+	endif
+
+	! write dial numbers 1-9, 0
+	set style "fontstyle_mid"
+	text2  currX, currY, txt
+
+next pt
+
+
+! end piece of rotary dial
+drawindex 50
+rot2  30
+add2  0, -(outer_rad + extra)
+	ep_width = (knobrad*1.5)/2
+	ep_width_red = ep_width-extra/2
+	ep_height = abs(outer_rad - inner_rad) + extra*2
+	poly2_b  6, 1+2+4,
+			 255, -1,  ! should be "only background pen" nonetheless
+			 -ep_width, 0, 1,
+			 -ep_height/5, ep_height/2, 800+1,  ! tangent direction
+			 -ep_width_red, ep_height, 1000+1,
+			 ep_width_red-0.05, ep_height-0.05, 1000+1,
+			 ep_width, 0, 1000+1,
+			 0, 0, 701
+del 2
+
+
+END  ! -- END -- END -- END -- END -- END -- END -- END -- END -- END -- !
+! ---------------------------------------------------------------------- !
+
+"drawReset":
+	poly2_b  16, 1, 1, 0,
+	        0, 0, 1,
+	        0, 0.10940, 1,
+	        0.05542, 0.10940, 1,
+	        0.07883, 0.10172, 1,
+	        0.08759, 0.08491, 1,
+	        0.08759, 0.07007, 1,
+	        0.07938, 0.05497, 1,
+	        0.06117, 0.04790, 1,
+	        0.07311, 0.03790, 1,
+	        0.09439, 0, 1,
+	        0.06757, 0, 1,
+	        0.04826, 0.03521, 1,
+	        0.03611, 0.04433, 1,
+	        0.02145, 0.04433, 1,
+	        0.02145, 0, 1,
+	        0, 0, 1
+	poly2_b  9, 1, 1, 0,
+	        0.02179, 0.09047, 1,
+	        0.02179, 0.06348, 1,
+	        0.05236, 0.06348, 1,
+	        0.06165, 0.06616, 1,
+	        0.06648, 0.07384, 1,
+	        0.06594, 0.08189, 1,
+	        0.06183, 0.08761, 1,
+	        0.05236, 0.09047, 1,
+	        0.02179, 0.09047, 1
+	poly2_b  30, 1, 1, 0,
+	        0.27074, 0.07758, 1,
+	        0.29107, 0.07758, 1,
+	        0.29107, 0.09019, 1,
+	        0.28361, 0.10152, 1,
+	        0.26842, 0.10940, 1,
+	        0.23212, 0.10940, 1,
+	        0.21461, 0.09791, 1,
+	        0.20972, 0.08195, 1,
+	        0.21616, 0.06136, 1,
+	        0.27074, 0.03973, 1,
+	        0.27074, 0.02274, 1,
+	        0.25683, 0.01734, 1,
+	        0.23989, 0.01734, 1,
+	        0.23086, 0.02637, 1,
+	        0.22671, 0.03742, 1,
+	        0.20869, 0.03742, 1,
+	        0.20869, 0.02274, 1,
+	        0.21590, 0.01142, 1,
+	        0.23212, 0, 1,
+	        0.26842, 0, 1,
+	        0.28181, 0.00575, 1,
+	        0.29339, 0.02403, 1,
+	        0.29339, 0.04694, 1,
+	        0.28228, 0.05972, 1,
+	        0.23673, 0.07368, 1,
+	        0.23285, 0.08271, 1,
+	        0.23677, 0.09019, 1,
+	        0.24970, 0.09361, 1,
+	        0.26595, 0.08823, 1,
+	        0.27074, 0.07758, 1
+	poly2_b  13, 1, 1, 0,
+	        0.11022, 0, 1,
+	        0.11022, 0.10940, 1,
+	        0.19152, 0.10940, 1,
+	        0.19152, 0.08946, 1,
+	        0.13167, 0.08946, 1,
+	        0.13167, 0.06650, 1,
+	        0.17951, 0.06650, 1,
+	        0.17951, 0.04698, 1,
+	        0.13167, 0.04698, 1,
+	        0.13167, 0.01866, 1,
+	        0.19152, 0.01866, 1,
+	        0.19152, 0, 1,
+	        0.11022, 0, 1
+	poly2_b  13, 1, 1, 0,
+	        0.31420, 0, 1,
+	        0.31420, 0.10940, 1,
+	        0.39551, 0.10940, 1,
+	        0.39551, 0.08946, 1,
+	        0.33566, 0.08946, 1,
+	        0.33566, 0.06650, 1,
+	        0.38350, 0.06650, 1,
+	        0.38350, 0.04698, 1,
+	        0.33566, 0.04698, 1,
+	        0.33566, 0.01866, 1,
+	        0.39551, 0.01866, 1,
+	        0.39551, 0, 1,
+	        0.31420, 0, 1
+	poly2_b  9, 1, 1, 0,
+	        0.49392, 0.10940, 1,
+	        0.49392, 0.08934, 1,
+	        0.46334, 0.08934, 1,
+	        0.46334, 0, 1,
+	        0.43924, 0, 1,
+	        0.43924, 0.08934, 1,
+	        0.40866, 0.08934, 1,
+	        0.40866, 0.10940, 1,
+	        0.49392, 0.10940, 1
+return
