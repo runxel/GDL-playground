@@ -24,6 +24,7 @@ See [full article](https://lucasbecker.de/posts/detecting-user-s-language-via-gd
 ## [Image Filter](objects/Image-Filter)
 ![Compatibility](https://img.shields.io/badge/compatibility-18_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
+
 DEMO for a image filter process. The filter (via a prefix) serves to limit the otherwise very large and performance-heavy image selection in a GDL object.
 
 
@@ -42,6 +43,15 @@ Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-t
 
 ### Basic Stuff
 
+- To automagically get a proper font selection make a new string parameter and name it `fontType`.  
+But what if you need to specify multiple font faces? Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.
+If that's still not enough do the following in the parameter script (with `myFontFace` being a string parameter):
+```
+! param script !
+DIM fontNames[]
+n = REQUEST("FONTNAMES_LIST", "", fontNames)
+VALUES "myFontFace" fontNames, CUSTOM
+```
 - You can't pass parameters or arguments to subroutines. Instead you have to fall back to something I call "nasty caller":  
 ```
 if x = y then
@@ -57,6 +67,8 @@ END !----------------------------!
 	! (...)
 return
 ```
+- [How to put an INFIELD over an UI_PICT in User Interface?](https://archicad-talk.graphisoft.com/viewtopic.php?f=6&t=69617):  
+You have to write the `UI_INFIELD` twice into your UI script: once before and once after the `UI_PICT` command.
 
 ---
 
