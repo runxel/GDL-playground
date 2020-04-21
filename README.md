@@ -39,7 +39,7 @@ Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-t
 
 ![Rounded Prisma](img/rounded-prisma.png)
 
-## [Wählscheibe | Rotary dial](objects/Wählscheibe
+## [Wählscheibe | Rotary dial](objects/Wählscheibe)
 ![Compatibility](https://img.shields.io/badge/compatibility-23_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
