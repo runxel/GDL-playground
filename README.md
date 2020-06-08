@@ -77,6 +77,20 @@ return
 ```
 - [How to put an INFIELD over an UI_PICT in User Interface?](https://archicad-talk.graphisoft.com/viewtopic.php?f=6&t=69617):  
 You have to write the `UI_INFIELD` twice into your UI script: once before and once after the `UI_PICT` command.
+- Due to the nature of floating point math comparing 2 real numbers might not yield the result you think. `if real_a = real_b …` and therelike will result in the GDL editor yelling at you. To circumvent any errors you should rather subtract the two values and check if the result falls short of a specified [machine epsilon](https://en.wikipedia.org/wiki/Machine_epsilon), mostly abbreviated as `eps` in GDL code.
+A very detailed structure could look like this:
+```
+dict EPS
+EPS.length	= 0.0001				! 1/10 mm
+EPS.square	= EPS.length**2
+EPS.scalar	= EPS.square
+EPS.angle	= acs(1 - EPS.scalar)	! 0.0081°
+```
+Determining if two numbers are the same would look like this now:
+```
+if (real_a - real_b) < EPS.length then [...] 
+```
+
 
 ---
 
