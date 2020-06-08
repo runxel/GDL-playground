@@ -1,0 +1,20 @@
+﻿! --- Param Script --- ! 
+
+if GLOB_MODPAR_NAME = "A" then
+	rad_total = A/2
+	parameters rad_total = rad_total
+endif 
+
+if GLOB_MODPAR_NAME = "rad_total" then
+	A = radtotal*2
+	parameters A = A
+endif
+
+values "A",         range [0.2,]
+values "rad_total", range [0.1,]
+
+values "n_rebar",   range [1,]
+values "dia_rebar", range [0.005,]
+
+values "gs_cont_pen", range[1,255]
+values "gs_fill_pen", range[1,255]

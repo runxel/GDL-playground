@@ -1,0 +1,32 @@
+﻿! --- 2D Script --- !
+
+pen   gs_cont_pen
+fill  gs_fill_type
+
+if b_show_center then
+	hotspot2  0, 0
+endif
+
+
+! We make an array which stores the "base" rotation value for each rebar, which will
+! act as the base for the `ang_rebar` parameter.
+
+dim _ang[]
+
+for i = 1 to n_rebar
+	_ang[i] = i*360/n_rebar
+next i
+
+
+for i = 0 to n_rebar-1
+	hotspot2  0, 0, i*3+1, ang_rebar[i+1], 6             !center
+	rot2 _ang[i+1]
+	hotspot2  rad_total, 0, i*3+2, ang_rebar[i+1], 4+(128*not(b_show_basept)) !base  // if you don't add `128` the base point will be always visible
+	rot2 ang_rebar[i+1]
+	hotspot2 rad_total,0, i*3+3, ang_rebar[i+1], 5       !mov
+
+	poly2_b	2, 1+2+4+64, gs_fill_pen, gs_back_pen,
+						rad_total,     0, 901,
+						dia_rebar/2, 360, 4001
+	del 2
+next i

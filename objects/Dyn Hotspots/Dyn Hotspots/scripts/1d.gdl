@@ -1,0 +1,25 @@
+﻿! --- Master Script --- !
+! author: @runxel       !
+! date:   2020-06-08    !
+
+
+! We store the 'offset' angle in the parameter `ang_rebar`.
+! If the number of rebars changes we need to expand or reduce the array.
+! Expanding is easy, but as soon we choose a smaller `n_rebar` we can't just reduce the number of items in an array.
+! GDL forbids the use of everything but scalar types as an init parameter for an array:
+!   dim myArray[n_rebar]  !<-- not allowed!
+! Instead we create a new dynamic array `reset`, which will be initialized with zeros for as many times 
+! there are now Rebars. Afterwards we can assign this array to `ang_rebar` and writing it back into the parameter.
+
+ 
+dim reset[]
+
+if vardim1(ang_rebar) # n_rebar then
+	for k = 1 to n_rebar
+		reset[k] = 0.0	
+	next k
+	ang_rebar = reset
+endif
+	
+
+parameters ang_rebar = ang_rebar
