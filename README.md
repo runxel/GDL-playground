@@ -1,11 +1,8 @@
 # [GDL-playground](https://github.com/runxel/GDL-playground)
-Playground for my GDL objects. Acts like pile of snippets. So if you see something of interest: Go and grab it and use it in your own projects.
+Playground for my GDL objects. Acts like pile of snippets/Demo objects. So if you see something of interest: Go and grab it, salvage what you need and use it in your own projects.
 
-_Your mileage may vary._
-
-[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
-
-No support!
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)  
+No support, no maintenance. . _Your mileage may vary._  
 It's just for learning, folks.
 
 ---
@@ -13,6 +10,12 @@ It's just for learning, folks.
 **Check out [my production objects](https://github.com/runxel/ArchiCAD-Objects) and find out how you can [boost your productivity](https://github.com/runxel/GDL-sublime) while programming your own GDL objects for Archicad!**
 
 ---
+
+## [Dyn Hotspots](objects/Dyn%20Hotspots)
+![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
+
+Explains how dynamic hotspots (in an array) work.
+
 
 ## [Get User Language](objects/Get-Language)
 ![Compatibility](https://img.shields.io/badge/compatibility-tbd-lightgrey?style=flat-square&logo=archicad&logoColor=white)
@@ -32,7 +35,7 @@ DEMO for a image filter process. The filter (via a prefix) serves to limit the o
 ![Compatibility](https://img.shields.io/badge/compatibility-21_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-yes-ff7979?style=flat-square)
 
-This object is a demo for a modeling case where you have two vectors with their angles and need a rounded corner where those vectors meet. How to get the coordinates?
+This object is a demo for a modeling case where you have two vectors with their angles and need a rounded corner where those vectors meet. How to get the _coordinates_?
 The solution is to offset the vectors by the radius and offset their intersection point back onto the original vectors.
 
 Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-tricks/calling-basicgeometriccalc-macro), which is now deprecated. Could easily be rewritten to use the newer, dict-based ["BasicGeometry" macro](http://gdl.graphisoft.com/tips-and-tricks/using-basicgeometry-macro).
@@ -44,21 +47,24 @@ Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-t
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
 If you ever were in need to dial from Archicad. Just a Demo object to explore some concepts, e.g. using a hotspot based interface to let the user input things when in plan.  
-_Note: Object doesn't actually call anybody sadly._
+_Note: Object doesn't actually call anybody, sadly._ 😢
 
 
 ---
 
+## Further references
+I dump some GDL insights here. 
+
 ### Basic Stuff
 
 - To automagically get a proper font selection make a new string parameter and name it `fontType`.  
-But what if you need to specify multiple font faces? Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.
+But what if you need to specify multiple font faces? Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.  
 If that's still not enough do the following in the parameter script (with `myFontFace` being a string parameter):
 ```
 ! param script !
-DIM fontNames[]
-n = REQUEST("FONTNAMES_LIST", "", fontNames)
-VALUES "myFontFace" fontNames, CUSTOM
+dim fontNames[]
+n = request("FONTNAMES_LIST", "", fontNames)
+values "myFontFace" fontNames, CUSTOM
 ```
 - You can't pass parameters or arguments to subroutines. Instead you have to fall back to something I call "nasty caller":  
 ```
@@ -91,6 +97,20 @@ Determining if two numbers are the same would look like this now:
 if (real_a - real_b) < EPS.length then [...] 
 ```
 
+### Advanced
+
+- Place a label there, where the user has actually clicked (having no marker):
+```
+if not(LABEL_HAS_POINTER) then
+	add2  LABEL_POSITION [2][1]	+ LABEL_POSITION [3][1],
+		  LABEL_POSITION [2][2]	+ LABEL_POSITION [3][2]
+endif
+```
+<small>[[source](https://archicad-talk.graphisoft.com/viewtopic.php?f=6&t=69980)]</small>
+
+---
+
+See also [selfGDL](https://selfgdl.de)
 
 ---
 
