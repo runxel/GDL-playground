@@ -42,6 +42,13 @@ Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-t
 
 ![Rounded Prisma](img/rounded-prisma.png)
 
+
+## [Unique Array](objects/Unique-Array/Unique-Array.gdl)
+![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
+
+Demo code for a way to ensure there are no duplicate items inside an onedimensional array.
+
+
 ## [Wählscheibe | Rotary dial](objects/Wählscheibe)
 ![Compatibility](https://img.shields.io/badge/compatibility-23_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)

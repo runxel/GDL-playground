@@ -1,0 +1,48 @@
+﻿! Make An Array Unique !
+! (= get rid of duplicates inside an array)
+! ["A", "A", "B", "C", "A", "C", "B"] => ["A", "B", "C"]
+! Caution: We don't do any kind of sorting here; the input determines ordering of the output.
+
+! test array:
+dim array[]
+array[1] = "A"
+array[2] = "A"
+array[3] = "B"
+array[4] = "C"
+array[5] = "A"
+array[6] = "C"
+array[7] = "B"
+
+size = vardim1(array)
+
+dim freq[]
+! init with -1
+for f = 1 to size
+    freq[f] = -1
+next f
+
+for i = 1 to size
+    count = 1
+    for j = i+1 to size
+        if array[i] = array[j] then
+            count = count+1
+            freq[j] = 0
+        endif
+    next j
+    if freq[i] # 0 then
+        freq[i] = count
+    endif
+next i
+
+dim unique[]
+unc = 1
+for l = 1 to size
+    if freq[l] > 0 then
+     ! if you assert that freq[l] = 1 then you can have a truly unique set (item has no dups)
+        unique[unc] = array[l]
+        unc=unc+1
+    endif
+next l
+
+! TEST:
+print unique
