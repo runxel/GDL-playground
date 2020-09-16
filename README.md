@@ -14,7 +14,25 @@ It's just for learning, folks.
 ## [Dyn Hotspots](objects/Dyn%20Hotspots)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
-Explains how dynamic hotspots (in an array) work.
+Explains how dynamic hotspots (in an array) work.  
+Basically, it's this:
+```vb
+!--- Param script ---! 
+values "n_in_array"   1, 2, 3, 4, 5, 6, 7, 8, 9, CUSTOM, RANGE [1,)
+
+dim setval[]
+for i=1 to n_in_array
+	if i > vardim1(array_val) then
+		setval[i] = 0
+	else
+		setval[i] = array_val[i]
+	endif
+next i
+
+array_val = setval
+
+parameters   array_val = array_val
+```
 
 
 ## [Get User Language](objects/Get-Language)
@@ -46,7 +64,7 @@ Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-t
 ## [Unique Array](objects/Unique-Array/Unique-Array.gdl)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
-Demo code for a way to ensure there are no duplicate items inside an onedimensional array.
+Demo code for a way to ensure there are no duplicate items inside an one-dimensional array.
 
 
 ## [Wählscheibe | Rotary dial](objects/Wählscheibe)
@@ -67,14 +85,14 @@ I dump some GDL insights here.
 - To automagically get a proper font selection make a new string parameter and name it `fontType`.  
 But what if you need to specify multiple font faces? Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.  
 If that's still not enough do the following in the parameter script (with `myFontFace` being a string parameter):
-```
+```vb
 ! param script !
 dim fontNames[]
 n = request("FONTNAMES_LIST", "", fontNames)
 values "myFontFace" fontNames, CUSTOM
 ```
 - You can't pass parameters or arguments to subroutines. Instead you have to fall back to something I call "nasty caller":  
-```
+```vb
 if x = y then
 	nasty_caller = 1
 else
@@ -92,7 +110,7 @@ return
 You have to write the `UI_INFIELD` twice into your UI script: once before and once after the `UI_PICT` command.
 - Due to the nature of floating point math comparing 2 real numbers might not yield the result you think. `if real_a = real_b …` and therelike will result in the GDL editor yelling at you. To circumvent any errors you should rather subtract the two values and check if the result falls short of a specified [machine epsilon](https://en.wikipedia.org/wiki/Machine_epsilon), mostly abbreviated as `eps` in GDL code.
 A very detailed structure could look like this:
-```
+```vb
 dict EPS
 EPS.length	= 0.0001				! 1/10 mm
 EPS.square	= EPS.length**2
@@ -107,7 +125,7 @@ if (real_a - real_b) < EPS.length then [...]
 ### Advanced
 
 - Place a label there, where the user has actually clicked (having no marker):
-```
+```vba
 if not(LABEL_HAS_POINTER) then
 	add2  LABEL_POSITION [2][1]	+ LABEL_POSITION [3][1],
 		  LABEL_POSITION [2][2]	+ LABEL_POSITION [3][2]
