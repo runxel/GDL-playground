@@ -98,7 +98,7 @@ To automagically get a proper font selection make a new string parameter and nam
 But what if you need to specify multiple font faces? Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.  
 If that's still not enough do the following in the parameter script (with `myFontFace` being a string parameter):
 ```vb
-! param script !
+!' param script !
 dim fontNames[]
 n = request("FONTNAMES_LIST", "", fontNames)
 values "myFontFace" fontNames, CUSTOM
@@ -113,7 +113,7 @@ else
 	nasty_caller = 2
 endif
 gosub "mysubroutine"
-END !----------------------------!
+END !'----------------------------!
 
 "mysubroutine":
 	i = foo * nasty_caller
@@ -167,9 +167,48 @@ arr = new_arr
 print arr   !' prints:  0.1  0.3
 ```
 
+#### Reno Status
+To get the renovation status of the object use `APPLICATON_QUERY`:
+```vb
+n = APPLICATION_QUERY ("OwnCustomParameters", "GetParameter(Renovation.RenovationStatus)", parValue)
+```
+
+`parValue` will hold the reno status as _localised_(!) string.  
+The following will display all the built-in parameters as text in the 2D: [<sup>Source</sup>](https://archicad-talk.graphisoft.com/viewtopic.php?f=49&t=70906)
+```vb
+DIM folderNamesArray[]
+n = APPLICATION_QUERY ("OwnCustomParameters", "GetParameterFolderNames()", folderNamesArray)
+
+for i = 1 to vardim1(folderNamesArray) step 3
+
+    DIM parNamesArray[]
+    querystring = "GetParameterNames(" + folderNamesArray[i] + ")"
+    n = APPLICATION_QUERY ("OwnCustomParameters", querystring, parNamesArray)
+    text2 0, 0, querystring
+    add2 1, -1
+
+    _nLines = 1
+    for j = 1 to vardim1(parNamesArray) step 3
+
+        parValue = ""
+        querystring = "GetParameter(" + parNamesArray[j] + ")"
+        n = APPLICATION_QUERY ("OwnCustomParameters", querystring, parValue)
+        text2 0, 0, querystring + ": " + parValue
+        add2 0, -1
+        _nLines = _nLines + 1
+
+    next j
+
+    del _nLines
+    add2 0, -_nLines
+
+next i
+```
+
 ### Advanced
 
-- Place a label there, where the user has actually clicked (having no marker):
+#### Label Placing
+Place a label there, where the user has actually clicked (having no marker):
 ```vba
 if not(LABEL_HAS_POINTER) then
 	add2  LABEL_POSITION [2][1]	+ LABEL_POSITION [3][1],
