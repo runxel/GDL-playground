@@ -10,8 +10,9 @@ It's just for learning, folks.
 **Check out [my production objects](https://github.com/runxel/ArchiCAD-Objects) and find out how you can [boost your productivity](https://github.com/runxel/GDL-sublime) while programming your own GDL objects for Archicad!**
 
 ---
+## Objects
 
-## [Dyn Hotspots](objects/Dyn%20Hotspots)
+### [Dyn Hotspots](objects/Dyn%20Hotspots)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
 Explains how dynamic hotspots (in an array) work.  
@@ -35,21 +36,21 @@ parameters   array_val = array_val
 ```
 
 
-## [Get User Language](objects/Get-Language)
+### [Get User Language](objects/Get-Language)
 ![Compatibility](https://img.shields.io/badge/compatibility-tbd-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
 See [full article](https://lucasbecker.de/posts/detecting-user-s-language-via-gdl) on how to detect (kinda) the language the user might speak.
 
 
-## [Image Filter](objects/Image-Filter)
+### [Image Filter](objects/Image-Filter)
 ![Compatibility](https://img.shields.io/badge/compatibility-18_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
 DEMO for a image filter process. The filter (via a prefix) serves to limit the otherwise very large and performance-heavy image selection in a GDL object.
 
 
-## [Rounded Prisma](objects/Rounded-Prisma)
+### [Rounded Prisma](objects/Rounded-Prisma)
 ![Compatibility](https://img.shields.io/badge/compatibility-21_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-yes-ff7979?style=flat-square)
 
@@ -61,13 +62,13 @@ Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-t
 ![Rounded Prisma](img/rounded-prisma.png)
 
 
-## [Unique Array](objects/Unique-Array/Unique-Array.gdl)
+### [Unique Array](objects/Unique-Array/Unique-Array.gdl)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
 Demo code for a way to ensure there are no duplicate items inside an one-dimensional array.
 
 
-## [Wählscheibe | Rotary dial](objects/Wählscheibe)
+### [Wählscheibe | Rotary dial](objects/Wählscheibe)
 ![Compatibility](https://img.shields.io/badge/compatibility-23_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
@@ -82,7 +83,18 @@ I dump some GDL insights here.
 
 ### Basic Stuff
 
-- To automagically get a proper font selection make a new string parameter and name it `fontType`.  
+#### LP_XML Converter
+Get yourself familiar with the LP_XMLConverter (get's shipped with Archicad). The most interesting option is to invoke it to convert to the HSF format:
+```shell
+LP_XMLConverter libpart2hsf <source> <dest>
+```
+
+#### Always init your vars
+All used variables in GDL _must_ be initialised. (It still does work if you don't, but Archicad will yell at you nonetheless)  
+A good way to init your arrays is to use a `for` loop.
+
+#### Font selection
+To automagically get a proper font selection make a new string parameter and name it `fontType`.  
 But what if you need to specify multiple font faces? Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.  
 If that's still not enough do the following in the parameter script (with `myFontFace` being a string parameter):
 ```vb
@@ -91,7 +103,9 @@ dim fontNames[]
 n = request("FONTNAMES_LIST", "", fontNames)
 values "myFontFace" fontNames, CUSTOM
 ```
-- You can't pass parameters or arguments to subroutines. Instead you have to fall back to something I call "nasty caller":  
+
+#### Passing variables
+You can't pass parameters or arguments to subroutines. Instead you have to fall back to something I call "nasty caller":  
 ```vb
 if x = y then
 	nasty_caller = 1
@@ -106,20 +120,51 @@ END !----------------------------!
 	! (...)
 return
 ```
-- [How to put an INFIELD over an UI_PICT in User Interface?](https://archicad-talk.graphisoft.com/viewtopic.php?f=6&t=69617):  
+
+You can however pass parameters when you are calling a macro. And there is even a second way: Macros are running in the same GDL context as the object from which the macro got called. This means you have access to the stack and you can pass information around this way, too. But beware, since you operating on the _same_ stack and not a copy you could easily mess up!
+
+#### UI_Infield over an image
+[How to put an INFIELD over an UI_PICT in User Interface?](https://archicad-talk.graphisoft.com/viewtopic.php?f=6&t=69617):  
 You have to write the `UI_INFIELD` twice into your UI script: once before and once after the `UI_PICT` command.
-- Due to the nature of floating point math comparing 2 real numbers might not yield the result you think. `if real_a = real_b …` and therelike will result in the GDL editor yelling at you. To circumvent any errors you should rather subtract the two values and check if the result falls short of a specified [machine epsilon](https://en.wikipedia.org/wiki/Machine_epsilon), mostly abbreviated as `eps` in GDL code.
+
+#### Precision
+Due to the nature of floating point math comparing 2 real numbers might not yield the result you think. `if real_a = real_b …` and therelike will result in the GDL editor yelling at you. To circumvent any errors you should rather subtract the two values and check if the result falls short of a specified [machine epsilon](https://en.wikipedia.org/wiki/Machine_epsilon), mostly abbreviated as `eps` in GDL code.
 A very detailed structure could look like this:
 ```vb
 dict EPS
-EPS.length	= 0.0001				! 1/10 mm
+EPS.length	= 0.0001				!' 1/10 mm
 EPS.square	= EPS.length**2
 EPS.scalar	= EPS.square
-EPS.angle	= acs(1 - EPS.scalar)	! 0.0081°
+EPS.angle	= acs(1 - EPS.scalar)	!' 0.0081°
 ```
 Determining if two numbers are the same would look like this now:
 ```
 if (real_a - real_b) < EPS.length then [...] 
+```
+
+#### Deleting from an array
+Sadly, there is no native way to delete/pop items from an array. This makes it necessary to do a bit of juggling:
+
+```vb
+dim arr[]
+!' init w/ some values
+arr[1] = 0.1
+arr[2] = 0.2
+arr[3] = 0.3
+
+!' the item index you want to delete
+todelete = 2
+
+dim new_arr[]
+check = 0
+for i = 1 to vardim1(arr)-1
+	if i = todelete then check = 1
+	new_arr[i] = arr[i+check]
+next i
+
+arr = new_arr
+
+print arr   !' prints:  0.1  0.3
 ```
 
 ### Advanced
@@ -132,6 +177,15 @@ if not(LABEL_HAS_POINTER) then
 endif
 ```
 <small>[[source](https://archicad-talk.graphisoft.com/viewtopic.php?f=6&t=69980)]</small>
+
+---
+
+## Changes
+Random experiences with changes in GDL.
+
+### AC 24
+While Archicad 24 did not bring any new GDL commands or functions, the HSF compared to 23 still _slightly_ changed. Inside the `libpartdocs.xml` file the `copyright` node lost its additional it hold before: `<Copyright SectVersion="1" SectionFlags="0" SubIdent="0">` is now just `<Copyright>`.
+
 
 ---
 
