@@ -1,0 +1,11 @@
+!--- Check if the Object is CALLed as a Macro ---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+caller_name = " "
+r = request("name_of_main", "", caller_name)
+
+if not(caller_name = "") then
+    print caller_name + " is CALLing this object."
+else
+    print "Object is run standalone."
+endif

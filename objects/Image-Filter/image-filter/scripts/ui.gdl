@@ -1,4 +1,4 @@
-﻿! UI-Script !
+﻿!--- UI script ---!
 
 object_name = "* Image Filter * DEMO *"
 ui_dialog object_name, 444, 266

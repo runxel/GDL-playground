@@ -1,4 +1,4 @@
-﻿! --- Param Script --- ! 
+﻿!--- Param script ---! 
 
 if GLOB_MODPAR_NAME = "A" then
 	rad_total = A/2

@@ -1,0 +1,27 @@
+!--- Change the Case of a String in GDL ---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+!>>> Conversion/Replacement String
+dim UPlo[2]
+UPlo[1] = "abcdefghijklmnopqrstuvwxyzàáâăãäåæąćçčçðďèéêëęìíîïłľĺńňñóôőöõøŕřůùúűüýþßśšşťţźžż"
+UPlo[2] = "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂĂÃÄÅÆĄĆÇČÇÐĎÈÉÊËĘÌÍÎÏŁĽĹŃŇÑÓÔŐÖÕØŔŘŮÙÚŰÜÝÞßŚŠŞŤŢŹŽŻ"
+
+make_uppercase = 0
+make_lowercase = 1
+
+!>>> Example
+txt = "a TeSt StRInG, wITh ÜmLäUtE aND $PeCiAL cH4ars!?"  : print txt
+_case = make_uppercase : gosub "ChangeCase"               : print txt
+_case = make_lowercase : gosub "ChangeCase"               : print txt
+
+END !---END---END---END---END---END---END---END---END---END---END---END---!
+
+"ChangeCase":
+    str_len = strlen(txt)
+    for i=1 to str_len
+        _s = strstr(UPlo[2-_case], strsub(txt, i, 1))
+        if _s then 
+            txt = strsub(txt, 1, i-1) + strsub(UPlo[1+_case], _s, 1) + strsub(txt, i+1, str_len-i)
+        endif
+    next i
+return

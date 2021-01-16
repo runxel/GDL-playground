@@ -1,9 +1,10 @@
-﻿! Make An Array Unique !
+﻿!--- Make An Array Unique in GDL ---!
 ! (= get rid of duplicates inside an array)
-! ["A", "A", "B", "C", "A", "C", "B"] => ["A", "B", "C"]
+! ["A", "A", "B", "C", "A", "C", "B"]  =>  ["A", "B", "C"]
 ! Caution: We don't do any kind of sorting here; the input determines ordering of the output.
+! Go to https://github.com/runxel/GDL-playground for more.
 
-! test array:
+!>>> Test Array:
 dim array[]
 array[1] = "A"
 array[2] = "A"
@@ -38,11 +39,12 @@ dim unique[]
 unc = 1
 for l = 1 to size
     if freq[l] > 0 then
-     ! if you assert that freq[l] = 1 then you can have a truly unique set (item has no dups)
+     ! if you assert that freq[l] = 1 then you can have a truly unique set
+     ! => list consist only of items with no dups
         unique[unc] = array[l]
         unc=unc+1
     endif
 next l
 
-! TEST:
+!>>> TEST:
 print unique

@@ -1,6 +1,7 @@
 ﻿! --- Master Script --- !
 ! author: @runxel       !
 ! date:   2020-06-08    !
+! Go to https://github.com/runxel/GDL-playground for more.
 
 
 ! We store the 'offset' angle in the parameter `ang_rebar`.

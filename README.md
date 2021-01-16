@@ -10,7 +10,29 @@ It's just for learning, folks.
 **Check out [my production objects](https://github.com/runxel/ArchiCAD-Objects) and find out how you can [boost your productivity](https://github.com/runxel/GDL-sublime) while programming your own GDL objects for Archicad!**
 
 ---
-## Objects
+## Demo Objects
+
+### [Array Sort](objects/Array-Sort.gdl)
+Sort the values of an array, so they appear in alphanumeric order.
+
+### [Changing Case of String](objects/Change-Case-of-String.gdl)
+Directly changing the case is not directly possible with GDL. This is partly due to the fact that _GDL is generally case-insensitive_.
+
+Test this statement with the following code:
+```vb
+if "ABCDE" = "abcde" then print "Same"
+!` will output "Same"
+```
+
+Why the demo object works:  
+We loop our way through every character in the string and replace it manually with the chosen case version. For this we need to have two conversion strings to be set up first, with the corresponding characters at the same place.  
+
+
+### [Check if Macro](objects/Macro-Check.gdl)
+Determine if the object is run alone or CALLed from another object.
+
+### [Delete Item from an Array](objects/Array-Delete-Item.gdl)
+Sadly, there is no native way to delete/pop items from an array. This makes it necessary to do a bit of juggling.
 
 ### [Dyn Hotspots](objects/Dyn%20Hotspots)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
@@ -19,7 +41,7 @@ Explains how dynamic hotspots (in an array) work.
 Basically, it's this:
 ```vb
 !--- Param script ---! 
-values "n_in_array"   1, 2, 3, 4, 5, 6, 7, 8, 9, CUSTOM, RANGE [1,)
+values "n_in_array"   1, 2, 3, 4, 5, 6, 7, 8, 9, custom, range [1,)
 
 dim setval[]
 for i=1 to n_in_array
@@ -50,6 +72,9 @@ See [full article](https://lucasbecker.de/posts/detecting-user-s-language-via-gd
 DEMO for a image filter process. The filter (via a prefix) serves to limit the otherwise very large and performance-heavy image selection in a GDL object.
 
 
+### [Local Coor](objects/Local-Coor)
+A subroutine for visual debugging (when you're lost in 3D).
+
 ### [Rounded Prisma](objects/Rounded-Prisma)
 ![Compatibility](https://img.shields.io/badge/compatibility-21_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-yes-ff7979?style=flat-square)
@@ -62,7 +87,7 @@ Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-t
 ![Rounded Prisma](img/rounded-prisma.png)
 
 
-### [Unique Array](objects/Unique-Array/Unique-Array.gdl)
+### [Unique Array](objects/Unique-Array.gdl)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
 Demo code for a way to ensure there are no duplicate items inside an one-dimensional array.
@@ -89,9 +114,11 @@ Get yourself familiar with the LP_XMLConverter (get's shipped with Archicad). Th
 LP_XMLConverter libpart2hsf <source> <dest>
 ```
 
+
 #### Always init your vars
 All used variables in GDL _must_ be initialised. (It still does work if you don't, but Archicad will yell at you nonetheless)  
 A good way to init your arrays is to use a `for` loop.
+
 
 #### Font selection
 To automagically get a proper font selection make a new string parameter and name it `fontType`.  
@@ -103,6 +130,7 @@ dim fontNames[]
 n = request("FONTNAMES_LIST", "", fontNames)
 values "myFontFace" fontNames, CUSTOM
 ```
+
 
 #### Passing variables
 You can't pass parameters or arguments to subroutines. Instead you have to fall back to something I call "nasty caller":  
@@ -123,9 +151,11 @@ return
 
 You can however pass parameters when you are calling a macro. And there is even a second way: Macros are running in the same GDL context as the object from which the macro got called. This means you have access to the stack and you can pass information around this way, too. But beware, since you operating on the _same_ stack and not a copy you could easily mess up!
 
+
 #### UI_Infield over an image
 [How to put an INFIELD over an UI_PICT in User Interface?](https://archicad-talk.graphisoft.com/viewtopic.php?f=6&t=69617):  
 You have to write the `UI_INFIELD` twice into your UI script: once before and once after the `UI_PICT` command.
+
 
 #### Precision
 Due to the nature of floating point math comparing 2 real numbers might not yield the result you think. `if real_a = real_b …` and therelike will result in the GDL editor yelling at you. To circumvent any errors you should rather subtract the two values and check if the result falls short of a specified [machine epsilon](https://en.wikipedia.org/wiki/Machine_epsilon), mostly abbreviated as `eps` in GDL code.
@@ -142,80 +172,28 @@ Determining if two numbers are the same would look like this now:
 if (real_a - real_b) < EPS.length then [...] 
 ```
 
-#### Deleting from an array
-Sadly, there is no native way to delete/pop items from an array. This makes it necessary to do a bit of juggling:
-
-```vb
-dim arr[]
-!' init w/ some values
-arr[1] = 0.1
-arr[2] = 0.2
-arr[3] = 0.3
-
-!' the item index you want to delete
-todelete = 2
-
-dim new_arr[]
-check = 0
-for i = 1 to vardim1(arr)-1
-	if i = todelete then check = 1
-	new_arr[i] = arr[i+check]
-next i
-
-arr = new_arr
-
-print arr   !' prints:  0.1  0.3
-```
 
 #### Reno Status
 To get the renovation status of the object use `APPLICATON_QUERY`:
 ```vb
-n = APPLICATION_QUERY ("OwnCustomParameters", "GetParameter(Renovation.RenovationStatus)", parValue)
+n = application_query("OwnCustomParameters", "GetParameter(Renovation.RenovationStatus)", parValue)
 ```
 
 `parValue` will hold the reno status as _localised_(!) string.  
-The following will display all the built-in parameters as text in the 2D: [<sup>Source</sup>](https://archicad-talk.graphisoft.com/viewtopic.php?f=49&t=70906)
-```vb
-DIM folderNamesArray[]
-n = APPLICATION_QUERY ("OwnCustomParameters", "GetParameterFolderNames()", folderNamesArray)
+[This script](objects/Read-Built-In-Properties.gdl) will display all the built-in properties as text in the 2D. [<sup>Source</sup>](https://archicad-talk.graphisoft.com/viewtopic.php?f=49&t=70906)
 
-for i = 1 to vardim1(folderNamesArray) step 3
-
-    DIM parNamesArray[]
-    querystring = "GetParameterNames(" + folderNamesArray[i] + ")"
-    n = APPLICATION_QUERY ("OwnCustomParameters", querystring, parNamesArray)
-    text2 0, 0, querystring
-    add2 1, -1
-
-    _nLines = 1
-    for j = 1 to vardim1(parNamesArray) step 3
-
-        parValue = ""
-        querystring = "GetParameter(" + parNamesArray[j] + ")"
-        n = APPLICATION_QUERY ("OwnCustomParameters", querystring, parValue)
-        text2 0, 0, querystring + ": " + parValue
-        add2 0, -1
-        _nLines = _nLines + 1
-
-    next j
-
-    del _nLines
-    add2 0, -_nLines
-
-next i
-```
 
 ### Advanced
 
 #### Label Placing
 Place a label there, where the user has actually clicked (having no marker):
-```vba
+```vb
 if not(LABEL_HAS_POINTER) then
 	add2  LABEL_POSITION [2][1]	+ LABEL_POSITION [3][1],
 		  LABEL_POSITION [2][2]	+ LABEL_POSITION [3][2]
 endif
 ```
-<small>[[source](https://archicad-talk.graphisoft.com/viewtopic.php?f=6&t=69980)]</small>
+[<sup>[source]</sup>](https://archicad-talk.graphisoft.com/viewtopic.php?f=6&t=69980)
 
 ---
 

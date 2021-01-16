@@ -1,0 +1,32 @@
+!--- Get the Built-In Properties in GDL ---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+!--- 2D script ---!
+
+dim folderNamesArray[]
+n = application_query("OwnCustomParameters", "GetParameterFolderNames()", folderNamesArray)
+
+for i = 1 to vardim1(folderNamesArray) step 3
+
+    dim parNamesArray[]
+    querystring = "GetParameterNames(" + folderNamesArray[i] + ")"
+    n = application_query("OwnCustomParameters", querystring, parNamesArray)
+    text2 0, 0, querystring
+    add2 1, -1
+
+    _nLines = 1
+    for j = 1 to vardim1(parNamesArray) step 3
+
+        parValue = ""
+        querystring = "GetParameter(" + parNamesArray[j] + ")"
+        n = application_query("OwnCustomParameters", querystring, parValue)
+        text2 0, 0, querystring + ": " + parValue
+        add2 0, -1
+        _nLines = _nLines + 1
+
+    next j
+
+    del _nLines
+    add2 0, -_nLines
+
+next i

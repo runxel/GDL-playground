@@ -1,4 +1,5 @@
-!––– [MASTERSCRIPT] –––!
+!––– Master script –––!
+! Go to https://github.com/runxel/GDL-playground for more.
 
 ! declare all the variables we need
 _dummy = "" ! only made so it can be ignored…

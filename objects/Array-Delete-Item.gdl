@@ -1,0 +1,22 @@
+!--- Delete an Item from an Array---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+dim arr[]
+  arr[1] = 0.1
+  arr[2] = 0.2
+  arr[3] = 0.3
+
+! You need to know the index the item you want
+! to delete is at
+todelete = 2
+
+dim new_arr[]
+check = 0
+for i = 1 to vardim1(arr)-1
+	if i = todelete then check = 1
+	new_arr[i] = arr[i+check]
+next i
+
+arr = new_arr
+
+print arr   !>>> will print:  "0.1  0.3"

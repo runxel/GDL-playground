@@ -1,4 +1,8 @@
-﻿! 3D script subroutine
+﻿!--- 3D script subroutine ----!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+!...!
+END
 
 "localCoor3D":
  !-------------------------------------------------
@@ -8,11 +12,11 @@
  !------------------------------------------------
 
     dict LOCOOR  ! local coordinate system
-    LOCOOR.size = 0.15
-    LOCOOR.sphere  = 0.005
-    LOCOOR.red = req("pen_of_rgb 1 0 0")
-    LOCOOR.green = req("pen_of_rgb 0 1 0")
-    LOCOOR.blue = req("pen_of_rgb 0 0 1")
+      LOCOOR.size = 0.15
+      LOCOOR.sphere  = 0.005
+      LOCOOR.red   = req("pen_of_rgb 1 0 0")
+      LOCOOR.green = req("pen_of_rgb 0 1 0")
+      LOCOOR.blue  = req("pen_of_rgb 0 0 1")
 
     sphere LOCOOR.sphere
 
@@ -22,5 +26,4 @@
     lin_ 0, 0, 0, 0, LOCOOR.size, 0
     pen LOCOOR.blue   ! BLUE – Z axis
     lin_ 0, 0, 0, 0, 0, LOCOOR.size
-
 return

@@ -1,4 +1,5 @@
-﻿! MASTER script !
+﻿!--- MASTER script ---!
+! Go to https://github.com/runxel/GDL-playground for more.
 
 dim lib_imgs[]
 ! get all user loaded images
