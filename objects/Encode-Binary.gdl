@@ -1,0 +1,23 @@
+!--- Encode Integer Number to Binary ---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+value_dec = 68
+
+dim _bin[]
+value_bin = ""
+i = 1
+_val = value_dec
+
+do
+    _bin[i] = _val % 2
+    _val = int(_val / 2)
+    i = i+1
+while _val > 0
+
+for i=vardim1(_bin) to 1 step -1
+    ! Reverse the order of the Array
+    value_bin = value_bin + str(_bin[i], 1, 0)
+next i
+
+!>>> will print `1000100`
+print value_bin

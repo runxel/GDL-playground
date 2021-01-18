@@ -1,0 +1,30 @@
+!--- Sort Buffer into Array Randomly ---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+!>>> An example buffer content
+put   5, 12, 7, 42, 9
+
+! You can't use anything else than scalars for setting up
+! arrays, so you just don't set a fixed width array...
+dim array[]
+
+n = nsp
+empty = -1
+for i=1 to n
+    ! Instead we initialize the array with as many items
+    ! as needed; we set it to a value that we know is not
+    ! on the buffer, e.g. '-1'
+    array[i] = empty
+next i
+
+for i=1 to n
+    s = 2 + int(rnd(n))
+    j = 0
+    while s > 0 do
+        ! Loop to find a free position
+        j = j+1
+        if j > n then j = 1
+        if array[j] = empty then s = s-1
+    endwhile
+    array[j] = get(1)
+next i

@@ -31,8 +31,17 @@ We loop our way through every character in the string and replace it manually wi
 ### [Check if Macro](objects/Macro-Check.gdl)
 Determine if the object is run alone or CALLed from another object.
 
+
+### [Decimal Notation Conversion](objects/Decimal-Notation-Conversion.gdl)
+The `SPLIT` command expects float numbers inside of strings to be in the American notation, ergo with a "dot" instead of a comma (as done in the European decimal notation).
+
+
+### [Encode Integer to Binary](objects/Encode-Binary.gdl)
+
+
 ### [Delete Item from an Array](objects/Array-Delete-Item.gdl)
 Sadly, there is no native way to delete/pop items from an array. This makes it necessary to do a bit of juggling.
+
 
 ### [Dyn Hotspots](objects/Dyn%20Hotspots)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
@@ -85,6 +94,15 @@ The solution is to offset the vectors by the radius and offset their intersectio
 Note: uses the ["BasicGeometricCalc" macro](http://gdl.graphisoft.com/tips-and-tricks/calling-basicgeometriccalc-macro), which is now deprecated. Could easily be rewritten to use the newer, dict-based ["BasicGeometry" macro](http://gdl.graphisoft.com/tips-and-tricks/using-basicgeometry-macro).
 
 ![Rounded Prisma](img/rounded-prisma.png)
+
+
+### [Sort Buffer](objects/Sort-Buffer.gdl)
+Sort numeric values on the buffer and ignore duplicate values.  
+We solve this problem by comparing two values and switch them and repeat this until `is_unsorted` is false.
+
+
+### [Sort Buffer into Array Randomly](objects/Sort-Buffer-Into-Array-Randomly.gdl)
+Sort the values from the buffer randomly into an array.
 
 
 ### [Unique Array](objects/Unique-Array.gdl)

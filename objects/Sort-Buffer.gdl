@@ -1,0 +1,45 @@
+!--- Sort the Buffer and make the Values unique ---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+eps = 0.0001
+
+!>>> Put values on the stack
+put 3, 9, 1, 4, 2, 4, 8, 7
+
+!>>> Sort buffer and ignore doubles
+do
+    n_in_buffer = nsp
+    is_unsorted = 0
+    i = 1
+
+    while (i <= n_in_buffer and n_in_buffer > 1 and nsp) do
+        if i = 1 then
+            ! First round
+            sort1 = get(1)
+        else
+            sort2 = get(1)
+            
+            if abs(sort1-sort2) < eps then
+                ! Values are identical
+                while (abs(sort1-sort2) < eps and nsp) do
+                    ! Get the next item in array
+                    sort2 = get(1)
+                    i = i+1
+                endwhile
+            endif
+
+            ! Order of values
+            if sort1 < sort2 then
+                put sort1
+            else
+                put sort2
+                sort2 = sort1
+                is_unsorted = 1
+            endif
+            sort1 = sort2
+        endif
+        i = i+1
+    endwhile
+    ! Put the last one on the Buffer
+    put sort2
+while (is_unsorted and nsp > 1)

@@ -1,0 +1,15 @@
+!--- Change the Decimal Seperator from European to American Notation ---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+ctext = "690,42"
+
+!>>> Substitute comma by a colon
+do
+    _s = strstr(ctext, ",")
+    if _s then
+        ctext = strsub(ctext, 1, _s-1) + "." + strsub(ctext, s+1, strlen(ctext)-s)
+    endif
+while s > 0
+
+!> prints "690.42"
+print ctext
