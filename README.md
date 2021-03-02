@@ -139,14 +139,29 @@ A good way to init your arrays is to use a `for` loop.
 
 
 #### Font selection
-To automagically get a proper font selection make a new string parameter and name it `fontType`.  
-But what if you need to specify multiple font faces? Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.  
-If that's still not enough do the following in the parameter script (with `myFontFace` being a string parameter):
+To automagically get a proper font selection make a new string parameter and name it `fontType`. (Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.)  
+
+But what if you need to specify multiple font faces?  
+Do the following in the parameter script (with `myFontFace` being a string parameter):
 ```vb
 !' param script !
 dim fontNames[]
-n = request("FONTNAMES_LIST", "", fontNames)
+rrr = request("Fontnames_List", "", fontNames)
 values "myFontFace" fontNames, CUSTOM
+```
+
+Pretty sure you have observed, that this system-generated font list will include fonts starting with the "@" sign ("at"-sign). Those fonts are used in vertical CJK context and shouldn't really be applied. At least outside of Asia those fonts are useless. For more info see [here](https://devblogs.microsoft.com/oldnewthing/20120719-00/?p=7093).  
+A solution is to just pass the list through a loop sorting out fonts with an "@" in their name:
+```vb
+!' still param script !
+dim reducedFontNames[]
+k = 0
+for i = 1 to vardim1(fontNames)
+	if not(strstr(fontNames[i], "@")) then
+		k = k + 1
+		reducedFontNames[k] = fontNames[i]
+	endif
+next i
 ```
 
 
