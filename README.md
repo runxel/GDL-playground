@@ -137,6 +137,14 @@ LP_XMLConverter libpart2hsf <source> <dest>
 All used variables in GDL _must_ be initialised. (It still does work if you don't, but Archicad will yell at you nonetheless)  
 A good way to init your arrays is to use a `for` loop.
 
+#### All Relevant Stories correctly set up
+```vb
+!' Param script '!
+ac_bottomlevel = GLOB_HSTORY_ELEV + GLOB_ELEVATION
+ac_toplevel = ac_bottomlevel + ZZYZX
+parameters  ac_bottomlevel = ac_bottomlevel,
+            ac_toplevel = ac_toplevel
+```
 
 #### Font selection
 To automagically get a proper font selection make a new string parameter and name it `fontType`. (Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.)  
