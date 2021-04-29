@@ -1,0 +1,45 @@
+!--- Draw Dashed Lines in 3D ---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+
+! 3D script >>>
+! Set the lengths for the dashed and the gaps
+! and convert paper lengths to model space
+dash_len = dash_len * GLOB_SCALE
+gap_len = gap_len * GLOB_SCALE
+
+dash_start = 0   ! where the first dash starts
+n_dash = 0       ! counter for dashes
+_flag = 0        ! stopper for while loop
+
+!>>> count dashes
+while _flag = 0 do
+    ! add a dash to the count
+    n_dash = n_dash + 1
+    ! advance to the next dash start
+    dash_start = dash_start + dash_len + gap_len
+    ! if that's beyond the end, stop
+    if dash_start > line_len then _flag = 1
+endwhile
+
+!>>> start of final dash
+dash_start = dash_start - dash_len - gap_len
+
+!>>> is the last dash trimmed by the end of the object
+if dash_start + dash_len > line_len then
+    b_trimdash = 1
+    trim_len = line_len - dash_start   ! special length for last dash
+else
+    ! object ends with gap, no special dash
+    b_trimdash = 0
+endif
+
+!>>> normal dashes, omit last if trimmed
+for k = 1 to n_dash - b_trimdash
+    lin_ 0, 0, 0,  dash_len, 0, 0
+    addx dash_len + gap_len
+next k
+
+!>>> special trimmed last dash if needed
+if b_trimdash then lin_ 0, 0, 0,  trim_len, 0, 0
+del n_dash - b_trimdash
