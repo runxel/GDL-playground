@@ -1,0 +1,13 @@
+!--- Sinus Wave ---!
+! Go to https://github.com/runxel/GDL-playground for more.
+
+n = 36   !>>> Number of support points
+d = A/n
+x = 360/n  !>>> Divide an imaginary circle
+
+for i=0 to n
+    put i*d, B/2 + (sin(i*x) * B/2)
+    if i # 0 then 
+        line2 get(2), use(2)
+    endif
+next i
