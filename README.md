@@ -134,8 +134,10 @@ LP_XMLConverter libpart2hsf <source> <dest>
 
 
 #### Always init your vars
-All used variables in GDL _must_ be initialised. (It still does work if you don't, but Archicad will yell at you nonetheless)  
-A good way to init your arrays is to use a `for` loop.
+All used variables in GDL _must_ be initialized. (It still works if you don't most of the time, but Archicad will yell at you nonetheless)  
+A good way to init your arrays is to use a `for` loop.  
+This holds true especially for Strings. Basically GDL only knows two basic types, those are: Number, and String. Booleans are Numbers internally, too.  
+Every new variable used is pre-initialized as a number. You will get type errors if you set a new string var inside a subroutine and try to use it in the main script later.
 
 #### All Relevant Stories correctly set up
 ```vb
