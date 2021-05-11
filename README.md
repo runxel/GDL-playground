@@ -10,7 +10,7 @@ It's just for learning, folks.
 **Check out [my production objects](https://github.com/runxel/ArchiCAD-Objects) and find out how you can [boost your productivity](https://github.com/runxel/GDL-sublime) while programming your own GDL objects for Archicad!**
 
 ---
-## Demo Objects
+## [Demo Objects](objects/)
 
 ### [Array Sort](objects/Array-Sort.gdl)
 Sort the values of an array, so they appear in alphanumeric order.
@@ -139,9 +139,9 @@ A good way to init your arrays is to use a `for` loop.
 
 
 #### Font selection
-To automagically get a proper font selection make a new string parameter and name it `fontType`. (Also working automatically are `fontTypeHeader`, `fontTypeText`, `fontTypeWatermark`, `strFontTypeCustOrig`and `strFontTypeID` – and possibly more, used by GS-scripted objects.)  
+To automagically get a proper font selection make a new string parameter and name it `fontType`. (There are a lot of similar parameters, that get a font selection. They are defined with others inside the `ARCHICAD_LIBRARY_MASTER.gsm`; Location in German lib: LCF > 4. Macros > Main XX : Base Macros XX)  
 
-But what if you need to specify multiple font faces?  
+But what if you need to specify multiple font faces in different places and want to have a drop-down selection list ready?  
 Do the following in the parameter script (with `myFontFace` being a string parameter):
 ```vb
 !' param script !
