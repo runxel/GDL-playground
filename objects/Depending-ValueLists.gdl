@@ -1,0 +1,17 @@
+!--- Depending ValueLists ---!
+! Lists for the "Values" command might be dependent on other value (lists).
+! Go to https://github.com/runxel/GDL-playground for more.
+
+values{2} "modeltype",
+			1, "Model 1",
+			2, "Model 2"
+
+! Set applicable sizes:
+dict cs
+cs.sizes[1].s[1] = 100
+cs.sizes[1].s[2] = 200
+cs.sizes[2].s[1] = 150
+cs.sizes[2].s[2] = 300
+cs.sizes[2].s[3] = 450
+
+values "sizes" cs.sizes[modeltype].s
