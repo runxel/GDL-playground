@@ -84,6 +84,11 @@ DEMO for a image filter process. The filter (via a prefix) serves to limit the o
 ### [Local Coor](objects/Local-Coor)
 A subroutine for visual debugging (when you're lost in 3D).
 
+
+### [Projection with custom attributes](objects/Projection%20Custom%20Attributes/Projection%20Custom%20Attributes/scripts/2d.gdl)
+Demonstrates the unique ability of `project2{4}`: Overriding the attributes and e.g. changing the contour to a dashed line type.
+
+
 ### [Rounded Prisma](objects/Rounded-Prisma)
 ![Compatibility](https://img.shields.io/badge/compatibility-21_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-yes-ff7979?style=flat-square)
@@ -109,6 +114,10 @@ Sort the values from the buffer randomly into an array.
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)
 
 Demo code for a way to ensure there are no duplicate items inside an one-dimensional array.
+
+
+### [Shadow Param](objects/Shadow%20Param/Shadow%20Param/scripts/1d.gdl)
+Shows a way of identifying which value in an array has changed last by user input by "shadowing" the whole parameter and performing a task afterwards.
 
 
 ### [Wählscheibe | Rotary dial](objects/Wählscheibe)
