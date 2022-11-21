@@ -1,0 +1,1 @@
+﻿EPS = 0.00001if GLOB_MODPAR_NAME = "hs_array" then	for i=1 to vardim1(hs_array)		if abs(hs_array[i] - shadow_hs_array[i]) > EPS then			! Wert hat sich geändert			lengths[i] = lengths[i] + 0.5			goto "break"		endif	next i	"break":	! zurückspielen	shadow_hs_array = hs_array	parameters shadow_hs_array = shadow_hs_array,				lengths = lengthsendif

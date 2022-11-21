@@ -1,0 +1,1 @@
+﻿for i=1 to vardim1(hs_array)	unID = i*10	hotspot2 0, 0,				unID, hs_array[i], 1+128	: unID=unID+1	hotspot2 hs_array[i], 0,	unID, hs_array[i], 2		: unID=unID+1	hotspot2 -1, 0,				unID, hs_array[i], 3		: unID=unID+1	line2 hs_array[i], 0, 	hs_array[i], lengths[i]	text2 hs_array[i], 0, inext i
