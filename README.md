@@ -120,6 +120,10 @@ Demo code for a way to ensure there are no duplicate items inside an one-dimensi
 Shows a way of identifying which value in an array has changed last by user input by "shadowing" the whole parameter and performing a task afterwards.
 
 
+### [Stretch Substitution](objects/Stretch%20Subst%20Demo/scripts/2d.gdl)
+Demonstrates how you are able to substitute the param that is shown in the tracker, so you can steer another parameter.
+
+
 ### [Wählscheibe | Rotary dial](objects/Wählscheibe)
 ![Compatibility](https://img.shields.io/badge/compatibility-23_▲-lightgrey?style=flat-square&logo=archicad&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-a9dfbf?style=flat-square)

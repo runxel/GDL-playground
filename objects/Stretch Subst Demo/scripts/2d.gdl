@@ -1,0 +1,1 @@
+﻿!--- 2D script ---!unID = 1! "A" gets manipulated, but "n_fields" is shown in the Trackerhotspot2 0, 	0, unID, A, 1+128, 	n_fields	: unID=unID+1hotspot2 -1, 	0, unID, A, 3, 		n_fields 	: unID=unID+1hotspot2 A, 	0, unID, A, 2, 		n_fields	: unID=unID+1for i=1 to n_fields	rect2 0, 0, 	field_width, B	hotspot2 0, 0, 	unID	add2 field_width, 0next idel n_fields
