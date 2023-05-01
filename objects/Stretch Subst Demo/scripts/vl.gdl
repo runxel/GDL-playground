@@ -1,1 +1,23 @@
-﻿!--- Param script ---!MAX_ = 30values "n_fields", 	range[1, MAX_]for i=1 to MAX_	put 	i * field_widthnext ivalues "A",  get(nsp)if GLOB_MODPAR_NAME = "A" then	n_fields = int((A + 0.001)/field_width)endifif GLOB_MODPAR_NAME = "n_fields" then	A = field_width * n_fieldsendifparameters \	A = A,	n_fields = n_fields
+﻿!--- Param script ---!
+MAX_ = 30
+values "n_fields", 	range[1, MAX_]
+
+
+for i=1 to MAX_
+	put 	i * field_width
+next i
+
+values "A",  get(nsp)
+
+
+if GLOB_MODPAR_NAME = "A" then
+	n_fields = int((A + 0.001)/field_width)
+endif
+
+if GLOB_MODPAR_NAME = "n_fields" then
+	A = field_width * n_fields
+endif
+
+parameters \
+	A = A,
+	n_fields = n_fields
