@@ -238,6 +238,74 @@ n = application_query("OwnCustomParameters", "GetParameter(Renovation.Renovation
 `parValue` will hold the reno status as _localised_(!) string.  
 [This script](objects/Read-Built-In-Properties.gdl) will display all the built-in properties as text in the 2D. [<sup>Source</sup>](https://archicad-talk.graphisoft.com/viewtopic.php?f=49&t=70906)
 
+<details>
+  <summary>All Built-in Properties</summary>
+	
+	The whole list:  
+	
+```
+! built-in properties
+"Builtin.Design_Option_Name"
+"Builtin.Design_Option_ID"
+"Builtin.Design_Option_Set_Name"
+"Builtin.General_Area"
+"Builtin.General_Height"
+"Builtin.General_NetVolume"
+"Builtin.General_Width"
+"Builtin.General_ElevationToProjectZero"
+"Builtin.General_ElevationToFirstReferenceLevel"
+"Builtin.General_ElevationToSecondReferenceLevel"
+"Builtin.General_ElevationToSeaLevel"
+"Builtin.General_ElevationToStory"
+"Builtin.General_HomeOffset"
+"Builtin.General_TopOffset"
+"Builtin.General_SurfaceArea"
+"Builtin.General_3DLength"
+"Builtin.General_Thickness"
+"Builtin.General_ConditionalVolume"
+"Builtin.General_GrossVolume"
+"Builtin.General_InsulationSkinThickness"
+"Builtin.General_3DPerimeter"
+"Builtin.General_FloorPlanPerimeter"
+"Builtin.General_Holes3DPerimeter"
+"Builtin.General_FloorPlanHolesPerimeter"
+"Builtin.General_SlantAngle"
+"Builtin.General_TopElevationToFirstReferenceLevel"
+"Builtin.General_TopElevationToHomeStory"
+"Builtin.General_TopElevationToProjectZero"
+"Builtin.General_TopElevationToSeaLevel"
+"Builtin.General_TopElevationToSecondReferenceLevel"
+"Builtin.General_BottomElevationToFirstReferenceLevel"
+"Builtin.General_BottomElevationToHomeStory"
+"Builtin.General_BottomElevationToProjectZero"
+"Builtin.General_BottomElevationToSecondReferenceLevel"
+"Builtin.General_BottomElevationToSeaLevel"
+"Builtin.General_OpeningNumber"
+"Builtin.General_CrossSectionHeightAtEndPerpendicular"
+"Builtin.General_CrossSectionHeightAtBeginPerpendicular"
+"Builtin.General_CrossSectionWidthAtEndPerpendicular"
+"Builtin.General_CrossSectionWidthAtBeginPerpendicular"
+"Builtin.General_CrossSectionHeightAtEndCut"
+"Builtin.General_CrossSectionHeightAtBeginCut"
+"Builtin.General_CrossSectionWidthAtEndCut"
+"Builtin.General_CrossSectionWidthAtBeginCut"
+"Builtin.General_CrossSectionAreaAtBeginCut"
+"Builtin.General_CrossSectionAreaAtEndCut"
+"Builtin.Component_NetProjectedArea"
+"Builtin.Component_Thickness"
+"Builtin.Component_CrossSectionHeight"
+"Builtin.Component_CrossSectionWidth"
+"Builtin.Component_CrossSectionArea"
+"Builtin.Component_NetVolume"
+"Builtin.Component_GrossVolume"
+"Builtin.Component_GrossProjectedArea"
+"Builtin.Component_ConditionalProjectedArea"
+"Builtin.Component_ConditionalVolume"
+```
+</details>
+
+
+
 
 ### Advanced
 
