@@ -1,1 +1,155 @@
-﻿!      ip!       •--                             !       |  \--                          !       /     \-                        !      |        \--                     !      /           \--                  !     |       |       \-                !     |   -\  /         \--             !     /      • center    ^ \--          !    |       | --\      /     \--       !    /       /    --\  / radius  \-     !   |       |        -v            \--  !   |       /          --\            \-!   /      |              --\           p1!  |       |                 --         !  /       /                            ! •       |                             ! p2                              ! ! params prepended with 'sel_' are from user inputstatus = 1INTERSECT_LINE_LINE = 4ipx = 0ipy = 0state = -1pen 		sel_penif b_fill then	fill 		sel_fillendifline_type 	sel_lt! VECTORS! first we need the normal vector of the segments!      0° = up!         ^! 270° <--|-->  90°p!         v!       180°if sel_angle_down < 90 then	angle_down = sel_angle_down + 270else	angle_down = 0  ! vector just goes straight upendifangle_upper = sel_angle_upper + 90u_down = sin(angle_down)v_down = cos(angle_down)u_upper = sin(angle_upper)v_upper = cos(angle_upper)! POINTSpx1 = A 	! point at bottom rightpy1 = 0px2 = 0 	! point at top leftpy2 = B! general INTERSECTION! call a macro (21 upwards) to get the intersection pt of two vectorscall "BasicGeometricCalc" parameters	iFunction	= INTERSECT_LINE_LINE,											vx1		= u_down,											vy1		= v_down,											px1		= px1,											py1		= py1,											vx2		= u_upper,											vy2		= v_upper,											px2		= px2,											py2		= py2, 		returned_parameters		ipx,								ipy,								state! set the orthogonal angle  ///  note the sign!ortho_u_down = -v_downortho_v_down =  u_downortho_u_upper =  v_upperortho_v_upper = -u_upper! offset each point towards the interior of the polygon by desired radius using ortho vector! point at bottom rightpx1_off = px1 + sel_radius * ortho_u_downpy1_off = py1 + sel_radius * ortho_v_down! same now for point at top leftpx2_off = px2 + sel_radius * ortho_u_upperpy2_off = py2 + sel_radius * ortho_v_upper! Intersect the new lines for the center point of the arccall "BasicGeometricCalc" parameters	iFunction	= INTERSECT_LINE_LINE,											vx1		= u_down,											vy1		= v_down,											px1		= px1_off,											py1		= py1_off,											vx2		= u_upper,											vy2		= v_upper,											px2		= px2_off,											py2		= py2_off, 		returned_parameters		centerx,								centery,								state! to find the point at which the arc intersects the contour,!    offset the circle center backwards to each original line! point 1; right sidecall "BasicGeometricCalc" parameters	iFunction	= INTERSECT_LINE_LINE,											vx1		= u_down,											vy1		= v_down,											px1		= px1,											py1		= py1,											vx2		= ortho_u_down,											vy2		= ortho_v_down,											px2		= centerx,											py2		= centery, 		returned_parameters		endx1,								endy1,								state! point 2; top sidecall "BasicGeometricCalc" parameters	iFunction	= INTERSECT_LINE_LINE,											vx1		= u_upper,											vy1		= v_upper,											px1		= px2,											py1		= py2,											vx2		= ortho_u_upper,											vy2		= ortho_v_upper,											px2		= centerx,											py2		= centery, 		returned_parameters		endx2,								endy2,								stateput 	0, 0, status,		A, 0, status,		endx1, endy1, status,		centerx, centery, 900+status,		endx2, endy2, 3000+status,		0, B, status,		0, 0, -1					poly2_b 	nsp/3, 1+2+4+0,			sel_fillpen, sel_backpen,			get(nsp)
+﻿!--- 2D script ---!
+!      ip
+!       •--                             
+!       |  \--                          
+!       /     \-                        
+!      |        \--                     
+!      /           \--                  
+!     |       |       \-                
+!     |   -\  /         \--             
+!     /      • center    ^ \--          
+!    |       | --\      /     \--       
+!    /       /    --\  / radius  \-     
+!   |       |        -v            \--  
+!   |       /          --\            \-
+!   /      |              --\           p1
+!  |       |                 --         
+!  /       /                            
+! •       |                             
+! p2                              
+! 
+
+
+! params prepended with 'sel_' are from user input
+
+status = 1
+INTERSECT_LINE_LINE = 4
+ipx = 0
+ipy = 0
+state = -1
+
+
+pen 		sel_pen
+if b_fill then
+	fill 		sel_fill
+endif
+line_type 	sel_lt
+
+! VECTORS
+! first we need the normal vector of the segments
+
+!      0° = up
+!         ^
+! 270° <--|-->  90°p
+!         v
+!       180°
+
+if sel_angle_down < 90 then
+	angle_down = sel_angle_down + 270
+else
+	angle_down = 0  ! vector just goes straight up
+endif
+
+angle_upper = sel_angle_upper + 90
+
+u_down = sin(angle_down)
+v_down = cos(angle_down)
+
+u_upper = sin(angle_upper)
+v_upper = cos(angle_upper)
+
+! POINTS
+px1 = A 	! point at bottom right
+py1 = 0
+px2 = 0 	! point at top left
+py2 = B
+
+! general INTERSECTION
+! call a macro (21 upwards) to get the intersection pt of two vectors
+call "BasicGeometricCalc" parameters	iFunction	= INTERSECT_LINE_LINE,
+											vx1		= u_down,
+											vy1		= v_down,
+											px1		= px1,
+											py1		= py1,
+											vx2		= u_upper,
+											vy2		= v_upper,
+											px2		= px2,
+											py2		= py2,
+ 		returned_parameters		ipx,
+								ipy,
+								state
+
+
+! set the orthogonal angle  ///  note the sign!
+ortho_u_down = -v_down
+ortho_v_down =  u_down
+
+ortho_u_upper =  v_upper
+ortho_v_upper = -u_upper
+
+! offset each point towards the interior of the polygon by desired radius using ortho vector
+! point at bottom right
+px1_off = px1 + sel_radius * ortho_u_down
+py1_off = py1 + sel_radius * ortho_v_down
+
+! same now for point at top left
+px2_off = px2 + sel_radius * ortho_u_upper
+py2_off = py2 + sel_radius * ortho_v_upper
+
+! Intersect the new lines for the center point of the arc
+call "BasicGeometricCalc" parameters	iFunction	= INTERSECT_LINE_LINE,
+											vx1		= u_down,
+											vy1		= v_down,
+											px1		= px1_off,
+											py1		= py1_off,
+											vx2		= u_upper,
+											vy2		= v_upper,
+											px2		= px2_off,
+											py2		= py2_off,
+ 		returned_parameters		centerx,
+								centery,
+								state
+
+! to find the point at which the arc intersects the contour,
+!    offset the circle center backwards to each original line
+! point 1; right side
+call "BasicGeometricCalc" parameters	iFunction	= INTERSECT_LINE_LINE,
+											vx1		= u_down,
+											vy1		= v_down,
+											px1		= px1,
+											py1		= py1,
+											vx2		= ortho_u_down,
+											vy2		= ortho_v_down,
+											px2		= centerx,
+											py2		= centery,
+ 		returned_parameters		endx1,
+								endy1,
+								state
+
+! point 2; top side
+call "BasicGeometricCalc" parameters	iFunction	= INTERSECT_LINE_LINE,
+											vx1		= u_upper,
+											vy1		= v_upper,
+											px1		= px2,
+											py1		= py2,
+											vx2		= ortho_u_upper,
+											vy2		= ortho_v_upper,
+											px2		= centerx,
+											py2		= centery,
+ 		returned_parameters		endx2,
+								endy2,
+								state
+
+
+put 	0, 0, status,
+		A, 0, status,
+		endx1, endy1, status,
+		centerx, centery, 900+status,
+		endx2, endy2, 3000+status,
+		0, B, status,
+		0, 0, -1
+
+					
+poly2_b 	nsp/3, 1+2+4+0,
+			sel_fillpen, sel_backpen,
+			get(nsp)
